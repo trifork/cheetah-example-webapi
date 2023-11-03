@@ -19,33 +19,13 @@ env:
   CONTEXT: .
 
 jobs:
-  should-run: # seperate step to support ci/cd status checks
-    runs-on: ubuntu-latest
-    outputs:
-      tag-check: ${{ steps.tag-check.outputs.value }}
-      event-name-check: ${{ steps.event-name-check.outputs.value }}
-
-    steps:
-      # the pull request contains the 'e2e-test' label
-      - name: Tag check
-        id: tag-check
-        if: ${{ contains(github.event.pull_request.labels.*.name, 'e2e-test') && !contains(github.event.pull_request.labels.*.name, 'blocked') }}
-        run: echo "value=true" >> "$GITHUB_OUTPUT"
-
-      # not started from a pull-request
-      - name: Check for specific label
-        id: event-name-check
-        if: ${{github.event_name != 'pull_request'}}
-        run: echo "value=true" >> "$GITHUB_OUTPUT"
-
-should-run:
+  should-run:
     uses: trifork/cheetah-infrastructure-utils-workflows/.github/workflows/e2e-should-run.yml@main
 
   e2e-test:
     needs: should-run
     if: ${{ needs.should-run.outputs.should-run }}
     runs-on: ubuntu-latest
-    if: ${{ needs.should-run.outputs.event-name-check == 'true' || needs.should-run.outputs.tag-check == 'true' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
