@@ -1,0 +1,31 @@
+name: Create and publish Cheetah.WebApi swagger files
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches: ["main"]
+    tags:
+      - "v*"
+  pull_request:
+    branches: ["main"]
+
+env:
+  ASSEMBLY_NAME: Cheetah.WebApi.dll # entrypoint assembly name
+  PROJECT_PATH: src/Cheetah.WebApi
+  SOLUTION_FILEPATH: src/Cheetah.WebApi.sln
+
+jobs:
+  generate-swagger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
+      - name: "Generate swagger file"
+        uses: trifork/cheetah-infrastructure-utils/.github/actions/generate-swagger@main
+        with:
+          read_package_pat: ${{ secrets.PACKAGE_PAT }} # we need this, as GITHUB_TOKEN only have permission to its own repo
+          project_path: ${{ env.PROJECT_PATH }}
+          assembly_name: ${{ env.ASSEMBLY_NAME }}
+          github_actor: ${{ github.actor }}
+          solution_filepath: ${{ env.SOLUTION_FILEPATH }}

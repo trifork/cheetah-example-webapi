@@ -1,0 +1,107 @@
+name: E2E
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *"
+  push:
+    branches: [ 'main', 'release/v**' ]
+  pull_request:
+    branches: [ 'main', 'release/v**' ]
+    types: [ opened, synchronize, reopened, labeled ]
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+env:
+  CONTEXT: .
+
+jobs:
+  should-run: # seperate step to support ci/cd status checks
+    runs-on: ubuntu-latest
+    outputs:
+      tag-check: ${{ steps.tag-check.outputs.value }}
+      event-name-check: ${{ steps.event-name-check.outputs.value }}
+
+    steps:
+      # the pull request contains the 'e2e-test' label
+      - name: Tag check
+        id: tag-check
+        if: ${{ contains(github.event.pull_request.labels.*.name, 'e2e-test') && !contains(github.event.pull_request.labels.*.name, 'blocked') }}
+        run: echo "value=true" >> "$GITHUB_OUTPUT"
+
+      # not started from a pull-request
+      - name: Check for specific label
+        id: event-name-check
+        if: ${{github.event_name != 'pull_request'}}
+        run: echo "value=true" >> "$GITHUB_OUTPUT"
+
+should-run:
+    uses: trifork/cheetah-infrastructure-utils-workflows/.github/workflows/e2e-should-run.yml@main
+
+  e2e-test:
+    needs: should-run
+    if: ${{ needs.should-run.outputs.should-run }}
+    runs-on: ubuntu-latest
+    if: ${{ needs.should-run.outputs.event-name-check == 'true' || needs.should-run.outputs.tag-check == 'true' }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.PACKAGE_PAT }}
+
+      - name: Checkout trifork/cheetah-development-infrastructure
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
+        with:
+          repository: trifork/cheetah-development-infrastructure
+          token: ${{ secrets.PACKAGE_PAT }} # `PACKAGE_PAT` is a secret that contains your PAT
+          path: integrationtests
+
+      - name: "Start e2e infrastructure"
+        working-directory: integrationtests/
+        run: |
+          docker compose --profile core up -d --build
+        env:
+          DOCKER_REGISTRY: ghcr.io/trifork/
+
+      - name: "Wait for opensearch, the slowest component"
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 3
+          max_attempts: 25
+          retry_wait_seconds: 5
+          warning_on_retry: false
+          command: 'docker run --rm --network=cheetah-infrastructure badouralix/curl-jq curl -u admin:admin -sS -X GET -H "Content-Type: application/json" http://opensearch:9200/_cat/indices'
+
+      - name: "Start Cheetah.Webapi (example)"
+        working-directory: .
+        run: docker compose up -d --build
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.PACKAGE_PAT }}
+
+      - name: "Check health"
+        id: "integrationtest"
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 1
+          max_attempts: 25
+          retry_wait_seconds: 5
+          warning_on_retry: false
+          command: 'docker run --rm --network=cheetah-infrastructure badouralix/curl-jq curl -sS -X GET -H "Content-Type: application/json" http://cheetahwebapi:80/health'
+
+      - name: "Check metrics"
+        shell: bash
+        run: |
+          docker run --rm --network=cheetah-infrastructure badouralix/curl-jq curl -sS -X GET -H "Content-Type: application/json" http://cheetahwebapi:80/metrics
+
+      - name: "Print logs"
+        if: always()
+        run: "docker logs src-cheetah.webapi-1" # docker compose logs
