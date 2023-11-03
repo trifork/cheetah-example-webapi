@@ -1,6 +1,5 @@
 {
     "extends": [
-        "github>trifork/cheetah-infrastructure-utils:default.json5"
-    ],
-    "dependencyDashboardApproval": true
+        "github>trifork/cheetah-infrastructure-utils-workflows:default.json5"
+    ]
 }
