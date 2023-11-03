@@ -35,4 +35,4 @@ ENV COMPlus_EnableDiagnostics=0
 
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT dotnet "Cheetah.WebApi.dll"
+ENTRYPOINT ["dotnet", "Cheetah.WebApi.dll"]

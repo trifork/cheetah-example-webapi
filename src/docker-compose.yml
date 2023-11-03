@@ -27,7 +27,7 @@ services:
       - "OpenSearch__OAuthScope=cheetahwebapi"
       - "OpenSearch__TokenEndpoint=http://cheetahoauthsimulator:80/oauth2/token"
 
-      - "Kafka__ClientId=cheetahwebalertservice"  
+      - "Kafka__ClientId=cheetahwebalertservice"
       - "Kafka__ClientSecret=1234"
       - "Kafka__AuthMode=OAuth2"
       - "Kafka__OAuthScope=cheetahwebalertservice"
