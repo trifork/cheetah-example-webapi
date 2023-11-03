@@ -1,8 +1,13 @@
 # Cheetah.WebApi
 
 This project contains the demo version of a Cheetah.WebApi.  
-The project utilizes DockerFiles and docker-compose to compartmentalize instances of the project and to help with ease of deployment.  
-It is assumed that the user of This template has an understanding of Docker and docker-compose, as well as an familiarity with an terminal of they choice.
+It showcases:
+
+* Produce a message to kafka
+* Consume a message from kafka
+* Query the opensearch database
+
+With the OAuth2 security model.
 
 ## Running the application
 
