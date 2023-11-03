@@ -8,6 +8,9 @@ using Microsoft.Extensions.Options;
 
 namespace Cheetah.WebApi
 {
+    /// <summary>
+    /// This class is used to ensure the kafka consumer is subscribed to a topic
+    /// </summary>
     class TopicSubscriberService : IHostedService
     {
         private IConsumer<Ignore, string> _kafkaConsumer;
@@ -22,6 +25,7 @@ namespace Cheetah.WebApi
         public Task StartAsync(CancellationToken cancellationToken)
         {
             _kafkaConsumer.Subscribe(_kafkaConsumerOptions.Value.Topic);
+            // NB: If you want to consume messages in a hosted service, then look at the cheetah-example-alertservice repository.
             return Task.CompletedTask;
         }
 
