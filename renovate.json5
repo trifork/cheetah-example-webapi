@@ -1,6 +1,5 @@
 {
     "extends": [
-        "github>trifork/cheetah-infrastructure-utils-workflows:default.json5",
-        "local>trifork/cheetah-infrastructure-utils"
+        "github>trifork/cheetah-infrastructure-utils-workflows:default.json5"
     ]
 }
