@@ -4,17 +4,17 @@ registries:
     type: nuget-feed
     url: https://nuget.pkg.github.com/trifork
     username: cheetahbot
-    password: ${{secrets.NUGET_PASSWORD}}
+    password: ${{secrets.CHEETAH_READ_TOKEN}}
   maven:
     type: maven-repository
     url: https://maven.pkg.github.com/trifork
     username: cheetahbot
-    password: ${{secrets.MAVEN_PASSWORD}}
+    password: ${{secrets.CHEETAH_READ_TOKEN}}
   docker:
     type: docker-registry
     url: ghcr.io
     username: cheetahbot
-    password: ${{secrets.DOCKER_PASSWORD}}
+    password: ${{secrets.CHEETAH_READ_TOKEN}}
 updates:
   - package-ecosystem: "nuget"
     directory: "/"
