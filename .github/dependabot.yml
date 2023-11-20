@@ -14,7 +14,7 @@ registries:
     type: docker-registry
     url: ghcr.io
     username: cheetahbot
-    password: ${{secrets.MAVEN_PASSWORD}}
+    password: ${{secrets.DOCKER_PASSWORD}}
 updates:
   - package-ecosystem: "nuget"
     directory: "/"
