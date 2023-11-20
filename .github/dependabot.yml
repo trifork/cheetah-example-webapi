@@ -1,0 +1,36 @@
+version: 2
+registries:
+  nuget: # Define access for a private registry
+    type: nuget-feed
+    url: https://nuget.pkg.github.com/trifork
+    username: cheetahbot
+    password: ${{secrets.NUGET_PASSWORD}}
+  maven:
+    type: maven-repository
+    url: https://maven.pkg.github.com/trifork
+    username: cheetahbot
+    password: ${{secrets.MAVEN_PASSWORD}}
+  docker:
+    type: docker-registry
+    url: ghcr.io
+    username: cheetahbot
+    password: ${{secrets.MAVEN_PASSWORD}}
+updates:
+  - package-ecosystem: "nuget"
+    directory: "/"
+    registries:
+      - nuget # Allow version updates for dependencies in this registry
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "maven"
+    directory: "/"
+    registries:
+      - maven
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/"
+    registries:
+      - docker
+    schedule:
+      interval: "daily"
