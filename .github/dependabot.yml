@@ -14,7 +14,7 @@ registries:
     type: docker-registry
     url: ghcr.io
     username: cheetahbot
-    password: ${{secrets.DOCKER_PASSWORD}}
+    password: ${{secrets.MAVEN_PASSWORD}}
 updates:
   - package-ecosystem: "nuget"
     directory: "/"
@@ -22,15 +22,21 @@ updates:
       - nuget # Allow version updates for dependencies in this registry
     schedule:
       interval: "daily"
+      time: "14:00"
+      timezone: Europe/Copenhagen
   - package-ecosystem: "maven"
     directory: "/"
     registries:
       - maven
     schedule:
       interval: "daily"
+      time: "14:00"
+      timezone: Europe/Copenhagen
   - package-ecosystem: "docker"
     directory: "/"
     registries:
       - docker
     schedule:
       interval: "daily"
+      time: "14:00"
+      timezone: Europe/Copenhagen
