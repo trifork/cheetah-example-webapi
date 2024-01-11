@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Reflection;
-using Cheetah.WebApi.Shared.Infrastructure.ServiceProvider;
+using Cheetah.WebApi.Infrastructure.Installers;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -52,7 +52,11 @@ namespace Cheetah.WebApi
                 }, true);
 
                 //Use custom DI installers
-                builder.Services.Install(builder.Environment, Assembly.GetAssembly(typeof(AssemblyAnchor))!);
+                builder.Services.InstallFluentValidation();
+                builder.Services.InstallServices(builder.Environment, builder.Configuration);
+                builder.Services.InstallOpenAPI();
+                builder.Services.InstallKafka(builder.Configuration);
+                builder.Services.InstallHealthChecks();
 
                 // Add hosted services
                 builder.Services.AddHostedService<TopicSubscriberService>();

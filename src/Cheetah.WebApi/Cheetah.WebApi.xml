@@ -4,6 +4,11 @@
         <name>Cheetah.WebApi</name>
     </assembly>
     <members>
+        <member name="T:Cheetah.WebApi.TopicSubscriberService">
+            <summary>
+            This class is used to ensure the kafka consumer is subscribed to a topic
+            </summary>
+        </member>
         <member name="M:Cheetah.WebApi.Presentation.Controllers.KafkaController.GetMessage">
             <summary>
             Consume a message from kafka

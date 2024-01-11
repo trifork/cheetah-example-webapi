@@ -1,22 +1,15 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using Cheetah.WebApi.Shared.Infrastructure.ServiceProvider;
-using Cheetah.WebApi.Core.Config;
 
 namespace Cheetah.WebApi.Infrastructure.Installers
 {
-    [InstallerPriority(Priorities.BeforeConfig)]
-    public class OpenApiInstaller : IServiceCollectionInstaller
+    public static class OpenApiInstaller
     {
-        public void Install(IServiceCollection services, IHostEnvironment hostEnvironment)
+        public static void InstallOpenAPI(this IServiceCollection services)
         {
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services
@@ -24,6 +17,9 @@ namespace Cheetah.WebApi.Infrastructure.Installers
                 //.ConfigureApiBehaviorOptions(x => { x.SuppressMapClientErrors = true; })
                 .AddJsonOptions(options =>
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
+
+            services.AddEndpointsApiExplorer();
 
             services.AddApiVersioning(options =>
                 {

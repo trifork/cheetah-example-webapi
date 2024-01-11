@@ -34,7 +34,7 @@ namespace Cheetah.WebApi.Presentation.Controllers
         [HttpGet("consume")]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetMessage()
+        public IActionResult GetMessage()
         {
             var msg = _kafkaConsumer.Consume(TimeSpan.FromMilliseconds(100)); // todo: make configurable
             if (msg?.Message == null)

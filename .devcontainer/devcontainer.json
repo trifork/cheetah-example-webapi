@@ -13,39 +13,28 @@
 	},
 	"containerEnv": {
 		"GITHUB_ACTOR": "${localEnv:GITHUB_ACTOR}",
-		"GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
+		"GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}",
+		"DOTNET_ROLL_FORWARD": "LatestMajor"
 	},
-	"runArgs": [
-		// Network where OpenSearch is running
-		"--network=cheetah-infrastructure"
-	],
 	"initializeCommand": "docker network create cheetah-infrastructure || true",
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				// Recommended extensions - GitHub
 				"GitHub.vscode-pull-request-github",
 				"GitHub.copilot",
-				// Recommended extensions - Collaboration
 				"eamodio.gitlens",
 				"EditorConfig.EditorConfig",
 				"MS-vsliveshare.vsliveshare-pack",
 				"streetsidesoftware.code-spell-checker",
 				"redhat.vscode-yaml",
-				// Recommended extensions - .NET
-				"Fudge.auto-using",
-				"jongrant.csharpsortusings",
-				"kreativ-software.csharpextensions",
-				// Recommended extensions - Markdown
 				"bierner.github-markdown-preview",
 				"DavidAnson.vscode-markdownlint",
 				"docsmsft.docs-linting",
 				"yzhang.markdown-all-in-one",
-				// Required extensions
-				"ms-dotnettools.csharp",
 				"VisualStudioExptTeam.vscodeintellicode",
-				"aliasadidev.nugetpackagemanagergui"
-			]
+				"aliasadidev.nugetpackagemanagergui",
+				"ms-dotnettools.csdevkit"
+			],
 		}
 	},
 	"features": {
@@ -63,5 +52,5 @@
 	// Configure tool-specific properties.
 	// "customizations": {},
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	 "remoteUser": "root"
+	"remoteUser": "root"
 }

@@ -16,7 +16,8 @@
 
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.5" />
-    <PackageReference Include="Cheetah.WebApi.Shared" Version="1.7.0" />
+    <PackageReference Include="Cheetah.OpenSearch" Version="0.1.0" />
+    <PackageReference Include="Cheetah.Kafka" Version="0.1.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.25" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
