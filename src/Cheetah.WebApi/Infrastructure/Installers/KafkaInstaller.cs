@@ -1,9 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 using Cheetah.WebApi.Core.Config;
 using Confluent.Kafka;
-using Microsoft.Extensions.Logging;
 using Cheetah.Kafka.Extensions;
 using Microsoft.Extensions.Configuration;
 

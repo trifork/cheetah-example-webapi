@@ -100,15 +100,15 @@ namespace Cheetah.WebApi
 
                 app.UseRouting();
 
-
                 app.UseAuthorization();
                 app.MapControllers();
 
+#pragma warning disable ASP0014
                 app.UseEndpoints(endpoints =>
                 {
                     endpoints.MapMetrics();
                 });
-
+#pragma warning restore ASP0014
                 app.Run();
             }
             catch (Exception ex)

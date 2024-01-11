@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <LangVersion>10</LangVersion>
+    <LangVersion>Latest</LangVersion>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <DocumentationFile>Cheetah.WebApi.xml</DocumentationFile>
     <UserSecretsId>bb3fdc17-ede2-42c1-82cf-eae032a2caa5</UserSecretsId>
