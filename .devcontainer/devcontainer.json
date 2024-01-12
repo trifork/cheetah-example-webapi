@@ -14,7 +14,8 @@
 	"containerEnv": {
 		"GITHUB_ACTOR": "${localEnv:GITHUB_ACTOR}",
 		"GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}",
-		"DOTNET_ROLL_FORWARD": "LatestMajor"
+		"DOTNET_ROLL_FORWARD": "LatestMajor",
+		"DOTNET_HOST_PATH": "/usr/share/dotnet/dotnet"
 	},
 	"initializeCommand": "docker network create cheetah-infrastructure || true",
 	"customizations": {

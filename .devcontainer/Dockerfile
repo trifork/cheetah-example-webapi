@@ -13,3 +13,7 @@ ARG GITHUB_ACTOR
 ARG GITHUB_TOKEN
 
 RUN dotnet nuget add source https://nuget.pkg.github.com/trifork/index.json -n trifork-github -u $GITHUB_ACTOR -p $GITHUB_TOKEN --store-password-in-clear-text
+
+# Install dotnet outdated
+RUN dotnet tool update --global dotnet-outdated-tool
+ENV PATH="$PATH:/root/.dotnet/tools"

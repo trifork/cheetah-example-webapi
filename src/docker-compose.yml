@@ -40,7 +40,7 @@ services:
     networks:
       - cheetah-infrastructure
     ports:
-      - 1751:80
+      - 1751:8080
       # - "1851:1851"
       - "1861:1861"
     #volumes:
