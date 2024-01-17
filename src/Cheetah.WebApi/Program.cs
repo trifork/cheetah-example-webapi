@@ -1,8 +1,11 @@
 using System;
 using System.Diagnostics;
+using System.Net.Http;
 using System.Reflection;
 using Cheetah.WebApi.Infrastructure.Installers;
+using Confluent.Kafka;
 using HealthChecks.UI.Client;
+using IdentityModel.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -55,8 +58,29 @@ namespace Cheetah.WebApi
                 builder.Services.InstallFluentValidation();
                 builder.Services.InstallServices(builder.Environment, builder.Configuration);
                 builder.Services.InstallOpenAPI();
-                builder.Services.InstallKafka(builder.Configuration);
+                // builder.Services.InstallKafka(builder.Configuration);
                 builder.Services.InstallHealthChecks();
+                builder.Services.AddSingleton<IConsumer<Ignore, string>>(new ConsumerBuilder<Ignore, string>(new ConsumerConfig
+                {
+                    BootstrapServers = "kafka:19092",
+                    GroupId = "gkfldæjk",
+                    AutoOffsetReset = AutoOffsetReset.Earliest,
+                    SaslMechanism = SaslMechanism.OAuthBearer,
+                    SecurityProtocol = SecurityProtocol.SaslPlaintext,
+                    EnablePartitionEof = true,
+                    AllowAutoCreateTopics = true,
+                    // SaslOauthbearerClientId = "default-access",
+                    // SaslOauthbearerClientSecret = "default-access-secret",
+                    // SaslOauthbearerMethod = SaslOauthbearerMethod.Oidc,
+                    // SaslOauthbearerTokenEndpointUrl = "http://keycloak:1852/realms/local-development/protocol/openid-connect/token",
+                    // SaslOauthbearerScope = "kafka",
+                    // SaslOauthbearerConfig = "test"
+
+
+                    // MaxPollIntervalMs= 10000,
+                    // SessionTimeoutMs = 6000,
+                }).SetOAuthBearerTokenRefreshHandler((client, config) => TokenRefreshHandler(client, config))
+            .Build());
 
                 // Add hosted services
                 builder.Services.AddHostedService<TopicSubscriberService>();
@@ -121,5 +145,36 @@ namespace Cheetah.WebApi
                 Log.CloseAndFlush();
             }
         }
+
+        private static void TokenRefreshHandler(IClient client, string cfg)
+        {
+
+            // Print instance of this function
+            using var httpClient = new HttpClient();
+            var tokenClient = new TokenClient(
+                httpClient,
+                new TokenClientOptions
+                {
+                    Address = "http://keycloak:1852/realms/local-development/protocol/openid-connect/token",
+                    ClientId = "default-access",
+                    ClientSecret = "default-access-secret"
+                }
+            );
+
+            var tokenResponse = tokenClient
+                .RequestClientCredentialsTokenAsync(
+                    scope: "kafka"
+                )
+                .GetAwaiter().GetResult();
+            Console.WriteLine("Config: ");
+            Console.WriteLine(cfg);
+
+            Console.WriteLine(tokenResponse.AccessToken);
+            Console.WriteLine(tokenResponse.ExpiresIn);
+
+
+            client.OAuthBearerSetToken(tokenResponse.AccessToken, DateTimeOffset.UtcNow.AddSeconds(tokenResponse.ExpiresIn).ToUnixTimeMilliseconds(), "unused");
+        }
+
     }
 }

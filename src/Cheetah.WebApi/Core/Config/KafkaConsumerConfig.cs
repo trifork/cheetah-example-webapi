@@ -6,6 +6,6 @@ namespace Cheetah.WebApi.Core.Config
     {
         public const string Position = nameof(KafkaConsumerConfig);
         public string Topic { get; set; } = "InputTopic";
-        public string ConsumerName { get; set; } = Dns.GetHostName();
+        public string ConsumerName { get; set; } = "test";
     }
 }

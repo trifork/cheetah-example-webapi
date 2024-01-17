@@ -24,13 +24,16 @@ namespace Cheetah.WebApi
         }
         public Task StartAsync(CancellationToken cancellationToken)
         {
+            Console.WriteLine($"Subscribing to topic: {_kafkaConsumerOptions.Value.Topic}");
             _kafkaConsumer.Subscribe(_kafkaConsumerOptions.Value.Topic);
+            // Console.WriteLine($"Subscribed to topic: {test}");
             // NB: If you want to consume messages in a hosted service, then look at the cheetah-example-alertservice repository.
             return Task.CompletedTask;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
+            Console.WriteLine("Stopping kafka consumer");
             _kafkaConsumer.Close();
             return Task.CompletedTask;
         }
