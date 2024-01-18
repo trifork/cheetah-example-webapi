@@ -4,9 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Prometheus;
 using Cheetah.WebApi.Core.Config;
-using Cheetah.OpenSearch.Extensions;
 using Newtonsoft.Json;
-using Cheetah.OpenSearch.Util;
 
 namespace Cheetah.WebApi.Infrastructure.Installers
 {

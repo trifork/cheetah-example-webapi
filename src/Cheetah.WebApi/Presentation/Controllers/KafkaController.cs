@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Cheetah.Auth.Authentication;
 using Cheetah.WebApi.Core.Config;
 using Confluent.Kafka;
 using IdentityModel;
