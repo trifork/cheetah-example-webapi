@@ -1,12 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 using Cheetah.WebApi.Core.Config;
 using Confluent.Kafka;
-using IdentityModel;
-using IdentityModel.Client;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -23,11 +19,12 @@ namespace Cheetah.WebApi.Presentation.Controllers
         private readonly IProducer<string, string> _kafkaProducer;
         private readonly IOptions<KafkaProducerConfig> _kafkaProducerConfig;
 
-        public KafkaController(IConsumer<Ignore, string> kafkaConsumer, IOptions<KafkaProducerConfig> kafkaProducerConfig)
+        public KafkaController(IConsumer<Ignore, string> kafkaConsumer,
+        IProducer<string, string> kafkaProducer, IOptions<KafkaProducerConfig> kafkaProducerConfig)
         {
             _kafkaProducerConfig = kafkaProducerConfig;
             _kafkaConsumer = kafkaConsumer;
-            // _kafkaProducer = kafkaProducer;
+            _kafkaProducer = kafkaProducer;
         }
 
         /// <summary>
@@ -39,15 +36,7 @@ namespace Cheetah.WebApi.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetMessage()
         {
-            Console.WriteLine(_kafkaConsumer.ToString());
-            _kafkaConsumer.Subscription.ForEach(
-                subscription =>
-                    Console.WriteLine($"Subscribed to: {subscription}")
-            );
-            // Console.WriteLine("Subscribing to topic: {_kafkaConsumerConfig.Value.Topic}");
-            Console.WriteLine("Before consume");
-            var msg = _kafkaConsumer.Consume(TimeSpan.FromMilliseconds(3000)); // todo: make configurable
-            Console.WriteLine("After consume");
+            var msg = _kafkaConsumer.Consume(TimeSpan.FromMilliseconds(100)); // todo: make configurable
             if (msg?.Message == null)
             {
                 return NotFound("No messages left!");

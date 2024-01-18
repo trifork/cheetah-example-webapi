@@ -13,29 +13,29 @@ services:
       secrets:
         - GITHUB_ACTOR
         - GITHUB_TOKEN
-    # environment:
-    #   - ASPNETCORE_ENVIRONMENT=Development
-    #   #- "ASPNETCORE_URLS=https://+:1851;http://+:1751"
-    #   #- "ASPNETCORE_Kestrel__Certificates__Default__Password=password"
-    #   #- "ASPNETCORE_Kestrel__Certificates__Default__Path=/root/.aspnet/https/aspnetapp.pfx"
-    #   - "Prometheus__port=1861"
-    #   - "OpenSearch__Url=http://opensearch:9200"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      #- "ASPNETCORE_URLS=https://+:1851;http://+:1751"
+      #- "ASPNETCORE_Kestrel__Certificates__Default__Password=password"
+      #- "ASPNETCORE_Kestrel__Certificates__Default__Path=/root/.aspnet/https/aspnetapp.pfx"
+      - "Prometheus__port=1861"
+      - "OpenSearch__Url=http://opensearch:9200"
 
-    #   - "OpenSearch__ClientId=cheetahwebapi"
-    #   - "OpenSearch__ClientSecret=admin"
-    #   - "OpenSearch__AuthMode=OAuth2"
-    #   - "OpenSearch__OAuthScope=cheetahwebapi"
-    #   - "OpenSearch__TokenEndpoint=http://cheetahoauthsimulator:80/oauth2/token"
+      - "OpenSearch__ClientId=cheetahwebapi"
+      - "OpenSearch__ClientSecret=admin"
+      - "OpenSearch__AuthMode=OAuth2"
+      - "OpenSearch__OAuthScope=cheetahwebapi"
+      - "OpenSearch__TokenEndpoint=http://cheetahoauthsimulator:80/oauth2/token"
 
-    #   - "Kafka__ClientId=cheetahwebalertservice"
-    #   - "Kafka__ClientSecret=1234"
-    #   - "Kafka__AuthMode=OAuth2"
-    #   - "Kafka__OAuthScope=cheetahwebalertservice"
-    #   - "Kafka__TokenEndpoint=http://cheetahoauthsimulator:80/oauth2/token"
-    #   - "Kafka__Url=kafka:19092"
+      - "Kafka__ClientId=cheetahwebalertservice"
+      - "Kafka__ClientSecret=1234"
+      - "Kafka__AuthMode=OAuth2"
+      - "Kafka__OAuthScope=cheetahwebalertservice"
+      - "Kafka__TokenEndpoint=http://cheetahoauthsimulator:80/oauth2/token"
+      - "Kafka__Url=kafka:19092"
 
-    #   - "KafkaProducerConfig__Topic=cheetahwebapi"
-    #   - "KafkaConsumerConfig__Topic=cheetahwebapi"
+      - "KafkaProducerConfig__Topic=cheetahwebapi"
+      - "KafkaConsumerConfig__Topic=cheetahwebapi"
 
     networks:
       - cheetah-infrastructure

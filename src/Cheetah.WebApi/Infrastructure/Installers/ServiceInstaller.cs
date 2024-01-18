@@ -19,15 +19,15 @@ namespace Cheetah.WebApi.Infrastructure.Installers
 
             //Services
             services.AddHttpContextAccessor();
-            // services.AddCheetahOpenSearch(configuration, cfg =>
-            // {
-            //     cfg.DisableDirectStreaming = hostEnvironment.IsDevelopment();
-            //     cfg.WithJsonSerializerSettings(settings =>
-            //     {
-            //         settings.MissingMemberHandling = MissingMemberHandling.Error;
-            //         settings.Converters.Add(new UtcDateTimeConverter());
-            //     });
-            // });
+            services.AddCheetahOpenSearch(configuration, cfg =>
+            {
+                cfg.DisableDirectStreaming = hostEnvironment.IsDevelopment();
+                cfg.WithJsonSerializerSettings(settings =>
+                {
+                    settings.MissingMemberHandling = MissingMemberHandling.Error;
+                    settings.Converters.Add(new UtcDateTimeConverter());
+                });
+            });
             // Hosted services
             // services.AddHostedService<TimedOpenSearchTokenRefresherService>();
 
