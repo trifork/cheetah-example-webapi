@@ -21,21 +21,14 @@ services:
       - "Prometheus__port=1861"
       - "OpenSearch__Url=http://opensearch:9200"
 
-      - "OpenSearch__ClientId=cheetahwebapi"
-      - "OpenSearch__ClientSecret=admin"
-      - "OpenSearch__AuthMode=OAuth2"
-      - "OpenSearch__OAuthScope=cheetahwebapi"
-      - "OpenSearch__TokenEndpoint=http://cheetahoauthsimulator:80/oauth2/token"
+      - "Kafka__OAuth2__ClientId=default-access"
+      - "Kafka__OAuth2__ClientSecret=default-access-secret"
 
-      - "Kafka__ClientId=cheetahwebalertservice"
-      - "Kafka__ClientSecret=1234"
-      - "Kafka__AuthMode=OAuth2"
-      - "Kafka__OAuthScope=cheetahwebalertservice"
-      - "Kafka__TokenEndpoint=http://cheetahoauthsimulator:80/oauth2/token"
       - "Kafka__Url=kafka:19092"
 
       - "KafkaProducerConfig__Topic=cheetahwebapi"
       - "KafkaConsumerConfig__Topic=cheetahwebapi"
+      - "KafkaConsumerConfig__ConsumerName=cheetahwebapi"
 
     networks:
       - cheetah-infrastructure

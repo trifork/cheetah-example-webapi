@@ -6,6 +6,7 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
@@ -41,7 +42,8 @@ namespace Cheetah.WebApi
                         .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
                         .MinimumLevel.Override("System", LogEventLevel.Error)
                         .MinimumLevel.Override("System.Net.Http.HttpClient", LogEventLevel.Warning)
-                        .WriteTo.Console(new RenderedCompactJsonFormatter());
+                        .WriteTo.Console();
+                    //.WriteTo.Console(new RenderedCompactJsonFormatter());
 
                     lc.MinimumLevel.Debug();
 
@@ -51,11 +53,13 @@ namespace Cheetah.WebApi
                     }
                 }, true);
 
+                var config = builder.Configuration.AddEnvironmentVariables().Build();
+
                 //Use custom DI installers
                 builder.Services.InstallFluentValidation();
-                builder.Services.InstallServices(builder.Environment, builder.Configuration);
+                builder.Services.InstallServices(builder.Environment, config);
                 builder.Services.InstallOpenAPI();
-                builder.Services.InstallKafka(builder.Configuration);
+                builder.Services.InstallKafka(config);
                 builder.Services.InstallHealthChecks();
 
                 // Add hosted services
@@ -77,7 +81,7 @@ namespace Cheetah.WebApi
                     // build a swagger endpoint for each discovered API version
                     foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
                     {
-                        c.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+                        c.SwaggerEndpoint($"/swagger/v{description.ApiVersion}/swagger.json", description.GroupName.ToUpperInvariant());
                     }
                 });
 

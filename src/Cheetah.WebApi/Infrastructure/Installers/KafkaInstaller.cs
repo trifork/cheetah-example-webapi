@@ -11,22 +11,36 @@ namespace Cheetah.WebApi.Infrastructure.Installers
 {
     public static class KafkaInstaller
     {
-        public static void InstallKafka(this IServiceCollection services, Microsoft.Extensions.Configuration.ConfigurationManager configuration)
+        public static void InstallKafka(this IServiceCollection services, IConfigurationRoot configuration)
         {
             var kafkaConsumerOptions = configuration.Get<KafkaConsumerConfig>();
+            var kafkaProducersOptions = configuration.Get<KafkaProducerConfig>();
+
             services.AddCheetahKafka(configuration, options =>
             {
                 options.ConfigureDefaultConsumer(config =>
                 {
                     config.AllowAutoCreateTopics = false;
                     config.GroupId = kafkaConsumerOptions.ConsumerName;
-                    config.AutoOffsetReset = AutoOffsetReset.Latest;
-                    config.EnableAutoCommit = true;
+                    config.AutoOffsetReset = AutoOffsetReset.Earliest;
+                    config.EnableAutoCommit = false;
+                });
+                options.ConfigureDefaultProducer(config =>
+                {
+                    config.AllowAutoCreateTopics = false;
+                    config.ClientId = kafkaProducersOptions.ProducerName;
+                    config.EnableBackgroundPoll = true;
                 });
             })
             // todo: SetErrorHandler && SecurityProtocol
-            .WithConsumer<Ignore, string>()
-            .WithProducer<Null, string>();
+            .WithConsumer<Ignore, string>(x =>
+            {
+                x.GroupId = kafkaConsumerOptions.ConsumerName;
+            })
+            .WithProducer<Null, string>(x =>
+            {
+                x.ClientId = kafkaProducersOptions.ProducerName;
+            });
 
             // services.AddSingleton<IProducer<Null, string>>((localProvider) =>
             // {

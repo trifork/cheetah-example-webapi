@@ -12,7 +12,7 @@ namespace Cheetah.WebApi.Infrastructure.Installers
 {
     public static class ServiceInstaller
     {
-        public static void InstallServices(this IServiceCollection services, IHostEnvironment hostEnvironment, ConfigurationManager configuration)
+        public static void InstallServices(this IServiceCollection services, IHostEnvironment hostEnvironment, IConfigurationRoot configuration)
         {
             //Options
             services.Configure<KafkaProducerConfig>(configuration.GetSection(KafkaProducerConfig.Position));

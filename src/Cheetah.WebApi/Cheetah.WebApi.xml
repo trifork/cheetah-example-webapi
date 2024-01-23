@@ -21,6 +21,18 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Cheetah.WebApi.Presentation.Controllers.KafkaController2.GetMessage(System.Threading.CancellationToken)">
+            <summary>
+            Consume a message from kafka
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cheetah.WebApi.Presentation.Controllers.KafkaController2.ProductMessage(System.String)">
+            <summary>
+            Produce a message to kafka
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Cheetah.WebApi.Presentation.Controllers.OpenSearchController.GetIndices">
             <summary>
             Retrieves all indices on the corresponding OpenSearch instance
