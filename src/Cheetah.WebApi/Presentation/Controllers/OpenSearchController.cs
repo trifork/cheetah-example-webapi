@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Cheetah.Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OpenSearch.Client;
 
 namespace Cheetah.WebApi.Presentation.Controllers
 {
@@ -14,11 +13,11 @@ namespace Cheetah.WebApi.Presentation.Controllers
     [Route("api/v{version:apiVersion}/[controller]")]
     public class OpenSearchController : ControllerBase
     {
-        private readonly ICheetahOpenSearchClient _opensearchNest;
+        private readonly IOpenSearchClient _opensearch;
 
-        public OpenSearchController(ICheetahOpenSearchClient nestClient)
+        public OpenSearchController(IOpenSearchClient nestClient)
         {
-            _opensearchNest = nestClient;
+            _opensearch = nestClient;
         }
 
         /// <summary>
@@ -30,7 +29,11 @@ namespace Cheetah.WebApi.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetIndices()
         {
-            var indicies = await _opensearchNest.GetIndices();
+            var result = await _opensearch.Indices.GetAsync(new GetIndexRequest(Indices.All));
+            var indicies = result.Indices.Select(index => index.Key.ToString())
+                                .Where(x => !x.StartsWith('.'))
+                                .ToList();
+
             return Ok(indicies);
         }
     }

@@ -1,15 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Prometheus;
-using Cheetah.WebApi.Shared.Infrastructure.ServiceProvider;
-using Cheetah.WebApi.Core.Config;
 
 namespace Cheetah.WebApi.Infrastructure.Installers
 {
-    [InstallerPriority(Priorities.AfterConfig)]
-    public class HealthCheckInstaller : IServiceCollectionInstaller
+    public static class HealthCheckInstaller
     {
-        public void Install(IServiceCollection services, IHostEnvironment hostEnvironment)
+        public static void InstallHealthChecks(this IServiceCollection services)
         {
             services.AddHealthChecks()
                 .ForwardToPrometheus();

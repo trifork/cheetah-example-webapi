@@ -1,16 +1,14 @@
 ﻿using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Cheetah.WebApi.Shared.Infrastructure.ServiceProvider;
 using Cheetah.WebApi.Core.Config;
 
 namespace Cheetah.WebApi.Infrastructure.Installers
 {
 
-    [InstallerPriority(Priorities.BeforeConfig)]
-    public class FluentValidationInstaller : IServiceCollectionInstaller
+    public static class FluentValidationInstaller
     {
-        public void Install(IServiceCollection services, IHostEnvironment hostEnvironment)
+        public static void InstallFluentValidation(this IServiceCollection services)
         {
             services.AddFluentValidation(config =>
             {

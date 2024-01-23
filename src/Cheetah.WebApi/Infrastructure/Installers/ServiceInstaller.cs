@@ -4,35 +4,34 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Prometheus;
 using Cheetah.WebApi.Core.Config;
-using Cheetah.WebApi.Shared.Infrastructure.Auth;
-using Cheetah.WebApi.Shared.Config;
-using Cheetah.Core.Interfaces;
-using Cheetah.Core.Infrastructure.Services.OpenSearchClient;
-using Cheetah.WebApi.Shared.Infrastructure.ServiceProvider;
-using Cheetah.Core.Config;
+using Cheetah.OpenSearch.Extensions;
+using Newtonsoft.Json;
+using Cheetah.OpenSearch.Util;
 
 namespace Cheetah.WebApi.Infrastructure.Installers
 {
-    [InstallerPriority(Priorities.Default)]
-    public class ServiceInstaller : IServiceCollectionInstaller
+    public static class ServiceInstaller
     {
-        public void Install(IServiceCollection services, IHostEnvironment hostEnvironment)
+        public static void InstallServices(this IServiceCollection services, IHostEnvironment hostEnvironment, IConfigurationRoot configuration)
         {
             //Options
-            var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
-            services.Configure<OAuthConfig>(configuration.GetSection(OAuthConfig.Position));
-            services.Configure<KafkaConfig>(configuration.GetSection(KafkaConfig.Position));
-            services.Configure<OpenSearchConfig>(configuration.GetSection(OpenSearchConfig.Position));
             services.Configure<KafkaProducerConfig>(configuration.GetSection(KafkaProducerConfig.Position));
             services.Configure<KafkaConsumerConfig>(configuration.GetSection(KafkaConsumerConfig.Position));
             services.Configure<PrometheusConfig>(configuration.GetSection(PrometheusConfig.Position));
 
             //Services
             services.AddHttpContextAccessor();
-            services.AddTransient<ICheetahOpenSearchClient, CheetahOpenSearchClient>();
-
+            services.AddCheetahOpenSearch(configuration, cfg =>
+            {
+                cfg.DisableDirectStreaming = hostEnvironment.IsDevelopment();
+                cfg.WithJsonSerializerSettings(settings =>
+                {
+                    settings.MissingMemberHandling = MissingMemberHandling.Error;
+                    settings.Converters.Add(new UtcDateTimeConverter());
+                });
+            });
             // Hosted services
-            services.AddHostedService<TimedOpenSearchTokenRefresherService>();
+            // services.AddHostedService<TimedOpenSearchTokenRefresherService>();
 
             //Cache
             services.AddMemoryCache();
