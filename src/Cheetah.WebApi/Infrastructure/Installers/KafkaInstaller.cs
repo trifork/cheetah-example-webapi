@@ -41,25 +41,6 @@ namespace Cheetah.WebApi.Infrastructure.Installers
             {
                 x.ClientId = kafkaProducersOptions.ProducerName;
             });
-
-            // services.AddSingleton<IProducer<Null, string>>((localProvider) =>
-            // {
-            //     var kafkaConfig = localProvider.GetRequiredService<IOptions<KafkaConfig>>();
-            //     var factory = localProvider.GetRequiredService<KafkaClientFactory>();
-            //     factory.CreateProducerBuilder<Null, string>(kafkaConfig.Value.Url)
-            //         .AddCheetahOAuthentication(localProvider)
-            //         .Build();
-
-            //     return new ProducerBuilder<Null, string>(
-            //                     new ProducerConfig
-            //                     {
-            //                         BootstrapServers = kafkaConfig.Value.Url,
-            //                         SaslMechanism = SaslMechanism.OAuthBearer,
-            //                         SecurityProtocol = SecurityProtocol.SaslPlaintext,
-            //                     })
-            //                     .AddCheetahOAuthentication(localProvider)
-            //                     .Build();
-            // });
         }
     }
 }
