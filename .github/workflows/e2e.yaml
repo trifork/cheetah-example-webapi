@@ -75,12 +75,12 @@ jobs:
           max_attempts: 25
           retry_wait_seconds: 5
           warning_on_retry: false
-          command: 'docker run --rm --network=cheetah-infrastructure badouralix/curl-jq curl -sS -X GET -H "Content-Type: application/json" http://cheetahwebapi:80/health'
+          command: 'docker run --rm --network=cheetah-infrastructure badouralix/curl-jq curl -sS -X GET -H "Content-Type: application/json" http://cheetahwebapi:8080/health'
 
       - name: "Check metrics"
         shell: bash
         run: |
-          docker run --rm --network=cheetah-infrastructure badouralix/curl-jq curl -sS -X GET -H "Content-Type: application/json" http://cheetahwebapi:80/metrics
+          docker run --rm --network=cheetah-infrastructure badouralix/curl-jq curl -sS -X GET -H "Content-Type: application/json" http://cheetahwebapi:8080/metrics
 
       - name: "Print logs"
         if: always()
