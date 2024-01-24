@@ -9,8 +9,12 @@ services:
       test: ["CMD", "curl", "-f", "http://cheetahwebapi:80/health"]
     build:
       context: ../
-      dockerfile: src/Cheetah.WebApi/Dockerfile
+      dockerfile: dockerfiles/Dockerfile
+      args:
+        - projectFile=Cheetah.WebApi/Cheetah.WebApi.csproj
+        - assemblyName=Cheetah.WebApi
       secrets:
+        # Nuget restore outside Visual Studio
         - GITHUB_ACTOR
         - GITHUB_TOKEN
     environment:
@@ -29,7 +33,6 @@ services:
       - "KafkaProducerConfig__Topic=cheetahwebapi"
       - "KafkaConsumerConfig__Topic=cheetahwebapi"
       - "KafkaConsumerConfig__ConsumerName=cheetahwebapi"
-
     networks:
       - cheetah-infrastructure
     ports:
