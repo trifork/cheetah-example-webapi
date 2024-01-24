@@ -1,0 +1,34 @@
+name: Create and publish Cheetah.WebApi Docker image
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches: ["main"]
+    tags:
+      - "v*"
+  pull_request:
+    branches: ["main"]
+
+env:
+  IMAGE_NAME: trifork/cheetah-example-webapi # image name, must have gh org prefix
+  PROJECT_PATH: Cheetah.WebApi/Cheetah.WebApi.csproj # path to csproj, relative to ./src (i know..)
+  DOCKERFILE_PATH: src/Cheetah.WebApi/Dockerfile
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: "Build and push"
+        uses: trifork/cheetah-infrastructure-utils-workflows/.github/actions/build-image/dotnet@main
+        with:
+          read_package_pat: ${{ secrets.PACKAGE_PAT }} # we need this, as GITHUB_TOKEN only have permission to its own repo
+          image_name: ${{ env.IMAGE_NAME }}
+          project_path: ${{ env.PROJECT_PATH }}
+          context: .
+          assembly_name: NA
+          github_run_id: ${{ github.run_id }}
+          dockerfile_path: ${{ env.DOCKERFILE_PATH }}
+          push_image: ${{ (github.ref_type == 'tag' || github.event_name == 'workflow_dispatch') && 'true' || 'false' }}
