@@ -35,8 +35,7 @@ namespace Cheetah.WebApi
                 builder.Host.UseSerilog(
                     (ctx, lc) =>
                     {
-                        lc
-                            .Enrich.FromLogContext()
+                        lc.Enrich.FromLogContext()
                             .Enrich.WithProperty("AppName", ctx.HostingEnvironment.ApplicationName)
                             .Enrich.WithProperty(
                                 "Environment",

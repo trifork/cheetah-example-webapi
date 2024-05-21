@@ -15,11 +15,11 @@ ARG projectFile
 RUN test -n "$projectFile"
 RUN --mount=type=secret,id=GITHUB_TOKEN \
     GITHUB_TOKEN="$(cat /run/secrets/GITHUB_TOKEN)" \
-    dotnet restore --packages $HOME/app/.nuget "$projectFile"
+    dotnet restore --packages "$HOME/app/.nuget" "$projectFile"
 
 COPY ./src ./
 
-RUN dotnet publish "$projectFile" -c Release -o /app/publish --no-restore --source $HOME/app/.nuget
+RUN dotnet publish "$projectFile" -c Release -o /app/publish --no-restore --source "$HOME/app/.nuget"
 
 FROM base AS final
 
