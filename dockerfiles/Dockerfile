@@ -6,7 +6,7 @@ WORKDIR /build
 
 COPY src/NuGet-CI.Config ./NuGet.Config
 COPY src/*/*.csproj ./
-RUN for file in "$(ls *.csproj)"; do mkdir -p "${file%.*}/" && mv $file "${file%.*}/"; done
+RUN for file in $(ls *.csproj); do mkdir -p "${file%.*}/" && mv "$file" "${file%.*}/"; done
 
 # This is only needed because swagger uses .NET 7
 ENV DOTNET_ROLL_FORWARD=LatestMajor
