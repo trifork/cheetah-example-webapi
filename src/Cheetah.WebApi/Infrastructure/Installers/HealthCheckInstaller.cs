@@ -7,9 +7,7 @@ namespace Cheetah.WebApi.Infrastructure.Installers
     {
         public static void InstallHealthChecks(this IServiceCollection services)
         {
-            services.AddHealthChecks()
-                .ForwardToPrometheus();
+            services.AddHealthChecks().ForwardToPrometheus();
         }
     }
 }
-

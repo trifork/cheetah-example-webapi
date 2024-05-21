@@ -1,6 +1,4 @@
 ﻿namespace Cheetah.WebApi
 {
-    internal class AssemblyAnchor
-    {
-    }
+    internal class AssemblyAnchor { }
 }

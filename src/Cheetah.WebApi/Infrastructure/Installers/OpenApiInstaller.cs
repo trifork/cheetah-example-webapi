@@ -1,13 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.OpenApi.Models;
-using System.Linq;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Cheetah.WebApi.Infrastructure.Installers
@@ -21,50 +21,54 @@ namespace Cheetah.WebApi.Infrastructure.Installers
                 .AddControllers()
                 //.ConfigureApiBehaviorOptions(x => { x.SuppressMapClientErrors = true; })
                 .AddJsonOptions(options =>
-                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
-
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())
+                );
 
             //services.AddEndpointsApiExplorer();
 
-            services.AddApiVersioning(options =>
+            services
+                .AddApiVersioning(options =>
                 {
                     // reporting api versions will return the headers "api-supported-versions" and "api-deprecated-versions"
                     options.ReportApiVersions = true;
                     options.AssumeDefaultVersionWhenUnspecified = true;
                     options.DefaultApiVersion = new ApiVersion(1, 0);
                 })
-                .AddVersionedApiExplorer(
-                    options =>
-                    {
-                        options.GroupNameFormat = "'v'VVV";
-                        options.SubstituteApiVersionInUrl = true;
-                    });
+                .AddVersionedApiExplorer(options =>
+                {
+                    options.GroupNameFormat = "'v'VVV";
+                    options.SubstituteApiVersionInUrl = true;
+                });
 
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
             //  services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
             services.AddSwaggerGen(options =>
             {
-                options.DocInclusionPredicate((docName, apiDesc) =>
-                {
-                    if (!apiDesc.TryGetMethodInfo(out MethodInfo methodInfo))
+                options.DocInclusionPredicate(
+                    (docName, apiDesc) =>
                     {
-                        return false;
+                        if (!apiDesc.TryGetMethodInfo(out MethodInfo methodInfo))
+                        {
+                            return false;
+                        }
+
+                        IEnumerable<ApiVersion> versions = methodInfo
+                            .DeclaringType.GetCustomAttributes(true)
+                            .OfType<ApiVersionAttribute>()
+                            .SelectMany(a => a.Versions);
+
+                        return versions.Any(v => $"v{v}" == docName);
                     }
-
-                    IEnumerable<ApiVersion> versions = methodInfo.DeclaringType
-                        .GetCustomAttributes(true)
-                        .OfType<ApiVersionAttribute>()
-                        .SelectMany(a => a.Versions);
-
-                    return versions.Any(v => $"v{v}" == docName);
-                });
+                );
 
                 options.SwaggerDoc("v1.0", new OpenApiInfo { Title = "My API", Version = "v1.0" });
                 options.SwaggerDoc("v2.0", new OpenApiInfo { Title = "My API", Version = "v2.0" });
 
-                var xmlPath = Path.Combine(AppContext.BaseDirectory,
-                    $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
+                var xmlPath = Path.Combine(
+                    AppContext.BaseDirectory,
+                    $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"
+                );
                 options.IncludeXmlComments(xmlPath, true);
             });
         }

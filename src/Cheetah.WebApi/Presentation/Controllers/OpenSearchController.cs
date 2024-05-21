@@ -30,9 +30,10 @@ namespace Cheetah.WebApi.Presentation.Controllers
         public async Task<IActionResult> GetIndices()
         {
             var result = await _opensearch.Indices.GetAsync(new GetIndexRequest(Indices.All));
-            var indicies = result.Indices.Select(index => index.Key.ToString())
-                                .Where(x => !x.StartsWith('.'))
-                                .ToList();
+            var indicies = result
+                .Indices.Select(index => index.Key.ToString())
+                .Where(x => !x.StartsWith('.'))
+                .ToList();
 
             return Ok(indicies);
         }
