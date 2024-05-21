@@ -56,7 +56,7 @@ jobs:
           # ADD YOUR CUSTOM ENV VARIABLES HERE OR DEFINE THEM IN A FILE .mega-linter.yml AT THE ROOT OF YOUR REPOSITORY
           DISABLE: COPYPASTE,SPELL # Uncomment to disable copy-paste and spell checks
           DISABLE_LINTERS: "MARKDOWN_MARKDOWN_LINK_CHECK,HTML_HTMLHINT,JSON_V8R,REPOSITORY_GIT_DIFF,REPOSITORY_TRIVY,REPOSITORY_CHECKOV,POWERSHELL_POWERSHELL"
-          DOCKERFILE_HADOLINT_ARGUMENTS: "--ignore ds026,sc2035"
+          DOCKERFILE_HADOLINT_ARGUMENTS: "--ignore ds026 --ignore sc2035"
           #DOCKERFILE_HADOLINT_FILTER_REGEX_EXCLUDE: ".devcontainer"
           FILTER_REGEX_EXCLUDE: '(\.automation/test|\.automation/generated|\.github|docs/javascripts|docs/overrides|docs/json-schemas|flavors|clj-kondo|TEMPLATES|.devcontainer|.vscode)'
           REPOSITORY_CHECKOV_ARGUMENTS: "--skip-check CKV2_GHA_1,CKV_DOCKER_7,"
