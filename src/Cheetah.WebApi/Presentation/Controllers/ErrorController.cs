@@ -8,23 +8,21 @@ namespace Cheetah.WebApi.Presentation.Controllers;
 public class ErrorController : ControllerBase
 {
     [HttpGet("/error-development")]
-    public IActionResult HandleErrorDevelopment(
-        [FromServices] IHostEnvironment hostEnvironment)
+    public IActionResult HandleErrorDevelopment([FromServices] IHostEnvironment hostEnvironment)
     {
         if (!hostEnvironment.IsDevelopment())
         {
             return NotFound();
         }
 
-        var exceptionHandlerFeature =
-            HttpContext.Features.Get<IExceptionHandlerFeature>()!;
+        var exceptionHandlerFeature = HttpContext.Features.Get<IExceptionHandlerFeature>()!;
 
         return Problem(
             detail: exceptionHandlerFeature.Error.StackTrace,
-            title: exceptionHandlerFeature.Error.Message);
+            title: exceptionHandlerFeature.Error.Message
+        );
     }
 
     [HttpGet("/error")]
-    public IActionResult HandleError() =>
-        Problem();
+    public IActionResult HandleError() => Problem();
 }

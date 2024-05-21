@@ -24,15 +24,18 @@ namespace Cheetah.WebApi.Presentation.Controllers
         private readonly IOptions<KafkaProducerConfig> _kafkaProducerConfig;
         private readonly ILogger<KafkaController> _logger;
 
-        public KafkaController(IConsumer<Ignore, string> kafkaConsumer,
-        IProducer<Null, string> kafkaProducer, IOptions<KafkaProducerConfig> kafkaProducerConfig, ILogger<KafkaController> logger)
+        public KafkaController(
+            IConsumer<Ignore, string> kafkaConsumer,
+            IProducer<Null, string> kafkaProducer,
+            IOptions<KafkaProducerConfig> kafkaProducerConfig,
+            ILogger<KafkaController> logger
+        )
         {
             _kafkaProducerConfig = kafkaProducerConfig;
             _logger = logger;
             _kafkaConsumer = kafkaConsumer; // todo: not thread safe?
             _kafkaProducer = kafkaProducer;
         }
-
 
         /// <summary>
         /// Consume a message from kafka
@@ -61,7 +64,10 @@ namespace Cheetah.WebApi.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> ProductMessage(string message)
         {
-            var msg = await _kafkaProducer.ProduceAsync(_kafkaProducerConfig.Value.Topic, new Message<Null, string> { Value = message }); // Note: producing synchronously is slow and should generally be avoided.
+            var msg = await _kafkaProducer.ProduceAsync(
+                _kafkaProducerConfig.Value.Topic,
+                new Message<Null, string> { Value = message }
+            ); // Note: producing synchronously is slow and should generally be avoided.
             return Ok($"msg sent at offset: {msg.Offset.Value} for topic: {msg.Topic}");
         }
     }

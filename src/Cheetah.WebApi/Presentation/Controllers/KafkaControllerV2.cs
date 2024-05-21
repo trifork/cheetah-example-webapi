@@ -26,14 +26,18 @@ namespace Cheetah.WebApi.Presentation.Controllers
         private readonly ILogger<KafkaController> _logger;
         private readonly KafkaClientFactory kafkaClientFactory;
 
-        public KafkaController2(IOptions<KafkaProducerConfig> kafkaProducerConfig, IOptions<KafkaConsumerConfig> kafkaConsumerConfig, ILogger<KafkaController> logger, KafkaClientFactory kafkaClientFactory)
+        public KafkaController2(
+            IOptions<KafkaProducerConfig> kafkaProducerConfig,
+            IOptions<KafkaConsumerConfig> kafkaConsumerConfig,
+            ILogger<KafkaController> logger,
+            KafkaClientFactory kafkaClientFactory
+        )
         {
             _kafkaProducerConfig = kafkaProducerConfig;
             this.kafkaConsumerConfig = kafkaConsumerConfig;
             _logger = logger;
             this.kafkaClientFactory = kafkaClientFactory;
         }
-
 
         /// <summary>
         /// Consume a message from kafka
@@ -44,11 +48,13 @@ namespace Cheetah.WebApi.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetMessage(CancellationToken token)
         {
-            var kafkaConsumer = kafkaClientFactory.CreateConsumerBuilder<Ignore, string>(x => // using kafka in a request-response manner has a large overhead
+            var kafkaConsumer = kafkaClientFactory
+                .CreateConsumerBuilder<Ignore, string>(x => // using kafka in a request-response manner has a large overhead
                 {
                     x.GroupId = kafkaConsumerConfig.Value.ConsumerName;
                     x.AutoOffsetReset = AutoOffsetReset.Earliest;
-                }).Build();
+                })
+                .Build();
 
             kafkaConsumer.Subscribe(kafkaConsumerConfig.Value.Topic);
             using var syncTokenSource = CancellationTokenSource.CreateLinkedTokenSource(token);
@@ -61,7 +67,9 @@ namespace Cheetah.WebApi.Presentation.Controllers
                     if (consumeResult?.Message != null)
                     {
                         kafkaConsumer.Commit(consumeResult); // Commit the offset
-                        _logger.LogDebug($"Received message: '{consumeResult.Message.Value}' at: '{consumeResult.TopicPartitionOffset}'.");
+                        _logger.LogDebug(
+                            $"Received message: '{consumeResult.Message.Value}' at: '{consumeResult.TopicPartitionOffset}'."
+                        );
                         return Ok(consumeResult.Message.Value);
                     }
                 }
@@ -92,8 +100,13 @@ namespace Cheetah.WebApi.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> ProductMessage(string message)
         {
-            using var _kafkaProducer = kafkaClientFactory.CreateProducerBuilder<Null, string>().Build();
-            var msg = await _kafkaProducer.ProduceAsync(_kafkaProducerConfig.Value.Topic, new Message<Null, string> { Value = message }); // Note: producing synchronously is slow and should generally be avoided.
+            using var _kafkaProducer = kafkaClientFactory
+                .CreateProducerBuilder<Null, string>()
+                .Build();
+            var msg = await _kafkaProducer.ProduceAsync(
+                _kafkaProducerConfig.Value.Topic,
+                new Message<Null, string> { Value = message }
+            ); // Note: producing synchronously is slow and should generally be avoided.
             _logger.LogDebug($"msg sent at offset: {msg.Offset.Value} for topic: {msg.Topic}");
 
             return Ok("Msg sent!");

@@ -32,26 +32,40 @@ namespace Cheetah.WebApi
 
                 var builder = WebApplication.CreateBuilder(args);
 
-                builder.Host.UseSerilog((ctx, lc) =>
-                {
-                    lc.Enrich.FromLogContext()
-                        .Enrich.WithProperty("AppName", ctx.HostingEnvironment.ApplicationName)
-                        .Enrich.WithProperty("Environment", ctx.HostingEnvironment.EnvironmentName)
-                        .Enrich.WithProperty("AssemblyVersion", Assembly.GetEntryAssembly()?.GetName().Version?.ToString() ?? "1.0.0")
-                        .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
-                        .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
-                        .MinimumLevel.Override("System", LogEventLevel.Error)
-                        .MinimumLevel.Override("System.Net.Http.HttpClient", LogEventLevel.Warning)
-                        .WriteTo.Console();
-                    //.WriteTo.Console(new RenderedCompactJsonFormatter());
-
-                    lc.MinimumLevel.Debug();
-
-                    if (Debugger.IsAttached)
+                builder.Host.UseSerilog(
+                    (ctx, lc) =>
                     {
-                        Serilog.Debugging.SelfLog.Enable(Console.WriteLine);
-                    }
-                }, true);
+                        lc
+                            .Enrich.FromLogContext()
+                            .Enrich.WithProperty("AppName", ctx.HostingEnvironment.ApplicationName)
+                            .Enrich.WithProperty(
+                                "Environment",
+                                ctx.HostingEnvironment.EnvironmentName
+                            )
+                            .Enrich.WithProperty(
+                                "AssemblyVersion",
+                                Assembly.GetEntryAssembly()?.GetName().Version?.ToString()
+                                    ?? "1.0.0"
+                            )
+                            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                            .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+                            .MinimumLevel.Override("System", LogEventLevel.Error)
+                            .MinimumLevel.Override(
+                                "System.Net.Http.HttpClient",
+                                LogEventLevel.Warning
+                            )
+                            .WriteTo.Console();
+                        //.WriteTo.Console(new RenderedCompactJsonFormatter());
+
+                        lc.MinimumLevel.Debug();
+
+                        if (Debugger.IsAttached)
+                        {
+                            Serilog.Debugging.SelfLog.Enable(Console.WriteLine);
+                        }
+                    },
+                    true
+                );
 
                 var config = builder.Configuration.AddEnvironmentVariables().Build();
 
@@ -66,9 +80,10 @@ namespace Cheetah.WebApi
                 builder.Services.AddHostedService<TopicSubscriberService>();
 
                 var app = builder.Build();
-                var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+                var apiVersionDescriptionProvider =
+                    app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
-                // It's important that the UseSerilogRequestLogging() call appears before handlers such as MVC. 
+                // It's important that the UseSerilogRequestLogging() call appears before handlers such as MVC.
                 // The middleware will not time or log components that appear before it in the pipeline.
                 // ref: https://github.com/serilog/serilog-aspnetcore
                 app.UseSerilogRequestLogging();
@@ -79,28 +94,37 @@ namespace Cheetah.WebApi
                 app.UseSwaggerUI(c =>
                 {
                     // build a swagger endpoint for each discovered API version
-                    foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
+                    foreach (
+                        var description in apiVersionDescriptionProvider.ApiVersionDescriptions
+                    )
                     {
-                        c.SwaggerEndpoint($"/swagger/v{description.ApiVersion}/swagger.json", description.GroupName.ToUpperInvariant());
+                        c.SwaggerEndpoint(
+                            $"/swagger/v{description.ApiVersion}/swagger.json",
+                            description.GroupName.ToUpperInvariant()
+                        );
                     }
                 });
 
+                app.UseCors(corsPolicyBuilder =>
+                    corsPolicyBuilder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin()
+                );
 
-                app.UseCors(corsPolicyBuilder => corsPolicyBuilder
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowAnyOrigin());
-
-                app.MapHealthChecks("/health",
+                app.MapHealthChecks(
+                    "/health",
                     new HealthCheckOptions
                     {
                         Predicate = _ => true,
                         ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                    });
-                app.MapHealthChecks("/health/ready",
-                    new HealthCheckOptions() { Predicate = (check) => check.Tags.Contains("ready") });
+                    }
+                );
+                app.MapHealthChecks(
+                    "/health/ready",
+                    new HealthCheckOptions() { Predicate = (check) => check.Tags.Contains("ready") }
+                );
 
-                app.UseExceptionHandler(app.Environment.IsDevelopment() ? "/error-development" : "/error");
+                app.UseExceptionHandler(
+                    app.Environment.IsDevelopment() ? "/error-development" : "/error"
+                );
 
                 app.UseRouting();
 
@@ -119,7 +143,6 @@ namespace Cheetah.WebApi
             {
                 Log.Fatal(ex, "Web host terminated unexpectedly");
             }
-
             finally
             {
                 Log.CloseAndFlush();
