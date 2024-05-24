@@ -1,5 +1,4 @@
 ---
-
 services:
   cheetah.webapi:
     image: ${DOCKER_REGISTRY-}cheetahwebapi
