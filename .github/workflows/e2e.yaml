@@ -35,13 +35,13 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.PACKAGE_PAT }}
+          password: ${{ secrets.READ_PACKAGE_PAT }}
 
       - name: Checkout trifork/cheetah-development-infrastructure
         uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
         with:
           repository: trifork/cheetah-development-infrastructure
-          token: ${{ secrets.PACKAGE_PAT }} # `PACKAGE_PAT` is a secret that contains your PAT
+          token: ${{ secrets.READ_PACKAGE_PAT }}
           path: integrationtests
 
       - name: "Start e2e infrastructure"
@@ -65,7 +65,7 @@ jobs:
         run: docker compose up -d --build
         env:
           GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.PACKAGE_PAT }}
+          GITHUB_TOKEN: ${{ secrets.READ_PACKAGE_PAT }}
 
       - name: "Check health"
         id: "integrationtest"
