@@ -24,7 +24,7 @@ jobs:
       - name: "Build and push"
         uses: trifork/cheetah-infrastructure-utils-workflows/.github/actions/build-image/dotnet@main
         with:
-          read_package_pat: ${{ secrets.PACKAGE_PAT }} # we need this, as GITHUB_TOKEN only have permission to its own repo
+          read_package_pat: ${{ secrets.WRITE_PACKAGE_PAT }} # we need this, as GITHUB_TOKEN only have permission to its own repo
           image_name: ${{ env.IMAGE_NAME }}
           project_path: ${{ env.PROJECT_PATH }}
           context: .
