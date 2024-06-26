@@ -50,6 +50,7 @@ jobs:
           docker compose --profile core up -d --build
         env:
           DOCKER_REGISTRY: ghcr.io/trifork/
+          INITIAL_KAFKA_TOPICS: cheetahwebapi
 
       - name: "Wait for opensearch, the slowest component"
         uses: nick-fields/retry@v3
