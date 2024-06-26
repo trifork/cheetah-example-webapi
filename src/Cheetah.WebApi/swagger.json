@@ -13,7 +13,7 @@
         "summary": "Consume a message from kafka",
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -52,7 +52,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -105,5 +105,11 @@
         "additionalProperties": { }
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "KafkaController",
+      "description": "Simple API collection for kafka which creates a new client for each request+response."
+    }
+  ]
 }

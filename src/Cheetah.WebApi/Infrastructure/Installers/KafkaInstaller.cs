@@ -42,11 +42,21 @@ namespace Cheetah.WebApi.Infrastructure.Installers
                 // todo: SetErrorHandler && SecurityProtocol
                 .WithConsumer<Ignore, string>(x =>
                 {
-                    x.GroupId = kafkaConsumerOptions.ConsumerName;
+                    x.SetKeyDeserializer(_ => Deserializers.Ignore);
+                    x.SetValueDeserializer(_ => Deserializers.Utf8);
+                    x.ConfigureClient(cfg => 
+                    {
+                        cfg.GroupId = kafkaConsumerOptions.ConsumerName;
+                    });
                 })
                 .WithProducer<Null, string>(x =>
                 {
-                    x.ClientId = kafkaProducersOptions.ProducerName;
+                    x.SetValueSerializer(_ => Serializers.Utf8);
+                    x.SetKeySerializer(_ => Serializers.Null);
+                    x.ConfigureClient(cfg => 
+                    {
+                        cfg.ClientId = kafkaProducersOptions.ProducerName;
+                    });
                 });
         }
     }

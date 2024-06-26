@@ -48,12 +48,16 @@ namespace Cheetah.WebApi.Presentation.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetMessage(CancellationToken token)
         {
+            var consumerOptions = new ConsumerOptions<Ignore, string>();
+            consumerOptions.ConfigureClient(cfg => 
+            {
+                cfg.GroupId = kafkaConsumerConfig.Value.ConsumerName;
+                cfg.AutoOffsetReset = AutoOffsetReset.Earliest;
+            });
+            consumerOptions.SetKeyDeserializer(Deserializers.Ignore);
+            consumerOptions.SetValueDeserializer(Deserializers.Utf8);
             var kafkaConsumer = kafkaClientFactory
-                .CreateConsumerBuilder<Ignore, string>(x => // using kafka in a request-response manner has a large overhead
-                {
-                    x.GroupId = kafkaConsumerConfig.Value.ConsumerName;
-                    x.AutoOffsetReset = AutoOffsetReset.Earliest;
-                })
+                .CreateConsumerBuilder(consumerOptions)// using kafka in a request-response manner has a large overhead
                 .Build();
 
             kafkaConsumer.Subscribe(kafkaConsumerConfig.Value.Topic);

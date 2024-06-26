@@ -9,6 +9,11 @@
             This class is used to ensure the kafka consumer is subscribed to a topic
             </summary>
         </member>
+        <member name="T:Cheetah.WebApi.Presentation.Controllers.KafkaController">
+            <summary>
+            Simply API collection to enable consume and produce for kafka messages. Relies on singleton clients.
+            </summary>
+        </member>
         <member name="M:Cheetah.WebApi.Presentation.Controllers.KafkaController.GetMessage">
             <summary>
             Consume a message from kafka
@@ -20,6 +25,11 @@
             Produce a message to kafka
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Cheetah.WebApi.Presentation.Controllers.KafkaController2">
+            <summary>
+            Simple API collection for kafka which creates a new client for each request+response.
+            </summary>
         </member>
         <member name="M:Cheetah.WebApi.Presentation.Controllers.KafkaController2.GetMessage(System.Threading.CancellationToken)">
             <summary>

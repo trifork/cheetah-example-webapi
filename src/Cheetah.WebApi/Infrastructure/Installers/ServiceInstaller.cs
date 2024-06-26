@@ -35,7 +35,11 @@ namespace Cheetah.WebApi.Infrastructure.Installers
                 configuration,
                 cfg =>
                 {
-                    cfg.DisableDirectStreaming = hostEnvironment.IsDevelopment();
+                    if (hostEnvironment.IsDevelopment()) {
+                        cfg.WithConnectionSettings(settings => {
+                            settings.DisableDirectStreaming();
+                        });
+                    }
                     cfg.WithJsonSerializerSettings(settings =>
                     {
                         settings.MissingMemberHandling = MissingMemberHandling.Error;
