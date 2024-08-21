@@ -9,11 +9,11 @@
     <UserSecretsId>bb3fdc17-ede2-42c1-82cf-eae032a2caa5</UserSecretsId>
   </PropertyGroup>
 
-  <!-- <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="dotnet tool restore" />
-    <Exec Command="dotnet swagger tofile -output swagger.json $(OutputPath)/$(AssemblyName).dll v1.0 " />
-    <Exec Command="dotnet swagger tofile -output swagger.json $(OutputPath)/$(AssemblyName).dll v2.0 " />
-  </Target> -->
+    <Exec Command="dotnet swagger tofile --output swagger.json $(OutputPath)/$(AssemblyName).dll v1.0 " />
+    <Exec Command="dotnet swagger tofile --output swagger.json $(OutputPath)/$(AssemblyName).dll v2.0 " />
+  </Target>
 
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.1" />
