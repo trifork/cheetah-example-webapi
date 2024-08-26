@@ -1,6 +1,3 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-WORKDIR /app
-
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /build
 
@@ -21,7 +18,8 @@ COPY ./src ./
 
 RUN dotnet publish "$projectFile" -c Release -o /app/publish --no-restore --source "$HOME/app/.nuget"
 
-FROM base AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-jammy-chiseled as final
+EXPOSE 8080
 
 WORKDIR /app
 COPY --from=build /app/publish .
