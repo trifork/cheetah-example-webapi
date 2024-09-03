@@ -18,7 +18,7 @@ COPY ./src ./
 
 RUN dotnet publish "$projectFile" -c Release -o /app/publish --no-restore --source "$HOME/app/.nuget"
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-jammy-chiseled as final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-noble-chiseled as final
 EXPOSE 8080
 
 WORKDIR /app
