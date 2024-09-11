@@ -60,7 +60,7 @@ jobs:
           max_attempts: 25
           retry_wait_seconds: 5
           warning_on_retry: false
-          command: 'docker run --rm --network=cheetah-infrastructure badouralix/curl-jq curl -u admin:admin -sS -X GET -H "Content-Type: application/json" http://opensearch:9200/_cat/indices'
+          command: 'docker run --rm --network=cheetah-infrastructure nixery.dev/shell/bash/jq/curl curl -u admin:admin -sS -X GET -H "Content-Type: application/json" http://opensearch:9200/_cat/indices'
 
       - name: "Start Cheetah.Webapi (example)"
         working-directory: .
@@ -77,12 +77,12 @@ jobs:
           max_attempts: 25
           retry_wait_seconds: 5
           warning_on_retry: false
-          command: 'docker run --rm --network=cheetah-infrastructure badouralix/curl-jq curl -sS -X GET -H "Content-Type: application/json" http://cheetahwebapi:8080/health'
+          command: 'docker run --rm --network=cheetah-infrastructure nixery.dev/shell/bash/jq/curl curl -sS -X GET -H "Content-Type: application/json" http://cheetahwebapi:8080/health'
 
       - name: "Check metrics"
         shell: bash
         run: |
-          docker run --rm --network=cheetah-infrastructure badouralix/curl-jq curl -sS -X GET -H "Content-Type: application/json" http://cheetahwebapi:8080/metrics
+          docker run --rm --network=cheetah-infrastructure nixery.dev/shell/bash/jq/curl curl -sS -X GET -H "Content-Type: application/json" http://cheetahwebapi:8080/metrics
 
       - name: "Print logs"
         if: always()
