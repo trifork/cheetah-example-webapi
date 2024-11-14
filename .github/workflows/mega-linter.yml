@@ -124,7 +124,8 @@ jobs:
           message: "[MegaLinter] Apply linters fixes"
           allow-empty: true
 
-      - name: Push changes
+      - name: Pull with rebase and Push changes
         if: steps.commit.outputs.commit
         run: |
+          git pull --rebase origin ${{ github.head_ref || github.ref_name }}
           git push origin ${{ github.head_ref || github.ref_name }}
