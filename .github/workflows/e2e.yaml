@@ -29,7 +29,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout repository
-        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
       - name: Log in to the Container registry
         uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3
@@ -39,7 +39,7 @@ jobs:
           password: ${{ secrets.READ_PACKAGE_PAT }}
 
       - name: Checkout trifork/cheetah-development-infrastructure
-        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
         with:
           repository: trifork/cheetah-development-infrastructure
           token: ${{ secrets.READ_PACKAGE_PAT }}
