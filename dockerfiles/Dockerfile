@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /build
 
 COPY src/NuGet-CI.Config ./NuGet.Config
@@ -18,7 +18,7 @@ COPY ./src ./
 
 RUN dotnet publish "$projectFile" -c Release -o /app/publish --no-restore --source "$HOME/app/.nuget"
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-noble-chiseled as final
+FROM mcr.microsoft.com/dotnet/aspnet:10.0-noble-chiseled as final
 EXPOSE 8080
 
 WORKDIR /app
