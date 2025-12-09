@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Asp.Versioning;
 using Cheetah.Kafka;
 using Cheetah.WebApi.Core.Config;
 using Confluent.Kafka;
