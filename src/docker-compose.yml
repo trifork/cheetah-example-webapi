@@ -4,7 +4,7 @@ services:
     image: ${DOCKER_REGISTRY-}cheetahwebapi
     hostname: cheetahwebapi
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://cheetahwebapi:80/health"]
+      test: ["CMD", "curl", "-f", "-k", "https://cheetahwebapi:1851/health"]
     build:
       context: ../
       dockerfile: dockerfiles/Dockerfile
@@ -17,16 +17,24 @@ services:
         - GITHUB_TOKEN
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      #- "ASPNETCORE_URLS=https://+:1851;http://+:1751"
-      #- "ASPNETCORE_Kestrel__Certificates__Default__Password=password"
-      #- "ASPNETCORE_Kestrel__Certificates__Default__Path=/root/.aspnet/https/aspnetapp.pfx"
-      - "Prometheus__port=1861"
-      - "OpenSearch__Url=http://opensearch:9200"
+      - "ASPNETCORE_URLS=https://+:1851;http://+:1751"
+      - "ASPNETCORE_Kestrel__Certificates__Default__Password=password"
+      - "ASPNETCORE_Kestrel__Certificates__Default__Path=/app/https/aspnetapp.pfx"
 
+      - "Prometheus__port=1861"
+
+      - "OpenSearch__Url=http://opensearch:9200"
+      - "OpenSearch__AuthMode=Basic"
+      - "OpenSearch__Username=admin"
+      - "OpenSearch__Password=admin"
+  
+      - "Kafka__Url=kafka:19092"
+      - "Kafka__SecurityProtocol=SaslPlaintext"
+      - "Kafka__SaslMechanism=OAuthBearer"
       - "Kafka__OAuth2__ClientId=default-access"
       - "Kafka__OAuth2__ClientSecret=default-access-secret"
-
-      - "Kafka__Url=kafka:19092"
+      - "Kafka__OAuth2__TokenEndpoint=http://keycloak:1852/realms/local-development/protocol/openid-connect/token"
+      - "Kafka__OAuth2__Scope=kafka"
 
       - "KafkaProducerConfig__Topic=cheetahwebapi"
       - "KafkaConsumerConfig__Topic=cheetahwebapi"
@@ -34,11 +42,11 @@ services:
     networks:
       - cheetah-infrastructure
     ports:
-      - 1751:8080
-      # - "1851:1851"
+      - 1751:1751
+      - "1851:1851"
       - "1861:1861"
-    #volumes:
-    #  - "${APPDATA:-.}/ASP.NET/https:/root/.aspnet/https:ro"
+    volumes:
+      - "$HOME/.aspnet/https:/app/https:ro"
 
 networks:
   cheetah-infrastructure:
