@@ -20,9 +20,7 @@ services:
       - "ASPNETCORE_URLS=https://+:1851;http://+:1751"
       - "ASPNETCORE_Kestrel__Certificates__Default__Password=password"
       - "ASPNETCORE_Kestrel__Certificates__Default__Path=/app/https/aspnetapp.pfx"
-
       - "Prometheus__port=1861"
-
       - "OpenSearch__Url=http://opensearch:9200"
       - "OpenSearch__AuthMode=OAuth2"
       - "OpenSearch__OAuth2__ClientId=default-access"
