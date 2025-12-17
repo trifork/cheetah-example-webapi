@@ -24,9 +24,11 @@ services:
       - "Prometheus__port=1861"
 
       - "OpenSearch__Url=http://opensearch:9200"
-      - "OpenSearch__AuthMode=Basic"
-      - "OpenSearch__Username=admin"
-      - "OpenSearch__Password=admin"
+      - "OpenSearch__AuthMode=OAuth2"
+      - "OpenSearch__OAuth2__ClientId=default-access"
+      - "OpenSearch__OAuth2__ClientSecret=default-access-secret"
+      - "OpenSearch__OAuth2__Scope=opensearch"
+      - "OpenSearch__OAuth2__TokenEndpoint=http://keycloak:1852/realms/local-development/protocol/openid-connect/token"
   
       - "Kafka__Url=kafka:19092"
       - "Kafka__SecurityProtocol=SaslPlaintext"
