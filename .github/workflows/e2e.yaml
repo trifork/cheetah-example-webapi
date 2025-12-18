@@ -86,4 +86,4 @@ jobs:
 
       - name: "Print logs"
         if: always()
-        run: "docker logs src-cheetah.webapi-1" # docker compose logs
+        run: "docker logs cheetahwebapi" # docker compose logs

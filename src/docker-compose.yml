@@ -1,6 +1,7 @@
 ---
 services:
   cheetahwebapi:
+    container_name: cheetahwebapi
     image: ${DOCKER_REGISTRY-}cheetahwebapi
     hostname: cheetahwebapi
     healthcheck:
