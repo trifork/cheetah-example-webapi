@@ -40,8 +40,6 @@ services:
       - 1751:8080
       - "1851:1851"
       - "1861:1861"
-    volumes:
-      - "$HOME/.aspnet/https:/app/https:ro"
 
 networks:
   cheetah-infrastructure:
