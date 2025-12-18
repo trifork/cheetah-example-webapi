@@ -1,11 +1,10 @@
 ---
 services:
-  cheetahwebapi:
-    container_name: cheetahwebapi
+  cheetah.webapi:
     image: ${DOCKER_REGISTRY-}cheetahwebapi
     hostname: cheetahwebapi
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://cheetahwebapi:1751/health"]
+      test: ["CMD", "curl", "-f", "http://cheetahwebapi:8080/health"]
     build:
       context: ../
       dockerfile: dockerfiles/Dockerfile
@@ -18,9 +17,6 @@ services:
         - GITHUB_TOKEN
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "ASPNETCORE_URLS=https://+:1851;http://+:1751"
-      - "ASPNETCORE_Kestrel__Certificates__Default__Password=password"
-      - "ASPNETCORE_Kestrel__Certificates__Default__Path=/app/https/aspnetapp.pfx"
       - "Prometheus__port=1861"
       - "OpenSearch__Url=http://opensearch:9200"
       - "OpenSearch__AuthMode=OAuth2"
@@ -41,7 +37,7 @@ services:
     networks:
       - cheetah-infrastructure
     ports:
-      - 1751:1751
+      - 1751:8080
       - "1851:1851"
       - "1861:1861"
     volumes:
