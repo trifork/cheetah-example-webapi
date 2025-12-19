@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Asp.Versioning;
 using Cheetah.WebApi.Core.Config;
 using Confluent.Kafka;
 using Microsoft.AspNetCore.Http;

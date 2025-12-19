@@ -1,4 +1,5 @@
 ﻿using Cheetah.WebApi.Core.Config;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,11 +10,8 @@ namespace Cheetah.WebApi.Infrastructure.Installers
     {
         public static void InstallFluentValidation(this IServiceCollection services)
         {
-            services.AddFluentValidation(config =>
-            {
-                config.AutomaticValidationEnabled = false;
-                config.RegisterValidatorsFromAssemblyContaining<AssemblyAnchor>();
-            });
+            services.AddFluentValidationClientsideAdapters();
+            services.AddValidatorsFromAssemblyContaining<AssemblyAnchor>();
         }
     }
 }
