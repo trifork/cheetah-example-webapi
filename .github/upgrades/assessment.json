@@ -1,0 +1,633 @@
+{
+  "settings": {
+    "components": {
+      "code": false,
+      "binaries": false
+    },
+    "targetId": "net10.0",
+    "targetDisplayName": ".NETCoreApp,Version=v10.0"
+  },
+  "analysisStartTime": "2025-12-09T16:05:07.0671852Z",
+  "analysisEndTime": "2025-12-09T16:05:13.2652989Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 2,
+      "issues": 8,
+      "incidents": 17,
+      "effort": 17
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 9,
+        "Optional": 3,
+        "Potential": 5,
+        "Information": 0
+      },
+      "category": {
+        "NuGet": 6,
+        "Project": 2,
+        "Api": 9
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+      "startingProject": true,
+      "issues": 8,
+      "storyPoints": 16,
+      "properties": {
+        "appName": "Cheetah.WebApi",
+        "projectKind": "AspNetCore",
+        "frameworks": [
+          "net8.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 20,
+        "numberOfCodeFiles": 18,
+        "linesTotal": 917,
+        "linesOfCode": 776,
+        "totalApiScanned": 905,
+        "minLinesOfCodeToChange": 9,
+        "maxLinesOfCodeToChange": 9
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "5f1c790d-e699-4854-b8ff-cd2d1b448a5a",
+          "ruleId": "NuGet.0002",
+          "projectPath": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Authentication.JwtBearer, 8.0.22\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Authentication.JwtBearer, and replace with new package Microsoft.AspNetCore.Authentication.JwtBearer 10.0.0",
+              "protected": "Microsoft.AspNetCore.Authentication.JwtBearer, 8.0.22\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Authentication.JwtBearer, and replace with new package Microsoft.AspNetCore.Authentication.JwtBearer 10.0.0"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+            "snippet": "Microsoft.AspNetCore.Authentication.JwtBearer, 8.0.22\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Authentication.JwtBearer, and replace with new package Microsoft.AspNetCore.Authentication.JwtBearer 10.0.0",
+            "protectedSnippet": "Microsoft.AspNetCore.Authentication.JwtBearer, 8.0.22\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Authentication.JwtBearer, and replace with new package Microsoft.AspNetCore.Authentication.JwtBearer 10.0.0",
+            "label": "Microsoft.AspNetCore.Authentication.JwtBearer 8.0.22",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Authentication.JwtBearer",
+              "PackageVersion": "8.0.22",
+              "PackageNewVersion": "10.0.0",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "90d74086-ee1f-481b-ae5e-be3a80fec28e",
+          "ruleId": "NuGet.0003",
+          "projectPath": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Mvc.Abstractions, 2.3.0\n\nRecommendation:\n\nPackage functionality included with new framework reference",
+              "protected": "Microsoft.AspNetCore.Mvc.Abstractions, 2.3.0\n\nRecommendation:\n\nPackage functionality included with new framework reference"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+            "snippet": "Microsoft.AspNetCore.Mvc.Abstractions, 2.3.0\n\nRecommendation:\n\nPackage functionality included with new framework reference",
+            "protectedSnippet": "Microsoft.AspNetCore.Mvc.Abstractions, 2.3.0\n\nRecommendation:\n\nPackage functionality included with new framework reference",
+            "label": "Microsoft.AspNetCore.Mvc.Abstractions 2.3.0",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Mvc.Abstractions",
+              "PackageVersion": "2.3.0",
+              "PackageNewVersion": null,
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "40580312-97c2-4fb7-b7ff-543222934c71",
+          "ruleId": "NuGet.0001",
+          "projectPath": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.VisualStudio.Azure.Containers.Tools.Targets, 1.22.1\n\nRecommendation:\n\nNo supported version found",
+              "protected": "Microsoft.VisualStudio.Azure.Containers.Tools.Targets, 1.22.1\n\nRecommendation:\n\nNo supported version found"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+            "snippet": "Microsoft.VisualStudio.Azure.Containers.Tools.Targets, 1.22.1\n\nRecommendation:\n\nNo supported version found",
+            "protectedSnippet": "Microsoft.VisualStudio.Azure.Containers.Tools.Targets, 1.22.1\n\nRecommendation:\n\nNo supported version found",
+            "label": "Microsoft.VisualStudio.Azure.Containers.Tools.Targets 1.22.1",
+            "properties": {
+              "PackageId": "Microsoft.VisualStudio.Azure.Containers.Tools.Targets",
+              "PackageVersion": "1.22.1",
+              "PackageNewVersion": null,
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "b29da38a-8880-4558-8711-12a93996f932",
+          "ruleId": "NuGet.0005",
+          "projectPath": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "FluentValidation.AspNetCore, 11.3.1\n\nRecommendation:\n\nShould be replaced.\nRemove FluentValidation.AspNetCore, and replace with new package FluentValidation.AspNetCore, 11.3.1",
+              "protected": "FluentValidation.AspNetCore, 11.3.1\n\nRecommendation:\n\nShould be replaced.\nRemove FluentValidation.AspNetCore, and replace with new package FluentValidation.AspNetCore, 11.3.1"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+            "snippet": "FluentValidation.AspNetCore, 11.3.1\n\nRecommendation:\n\nShould be replaced.\nRemove FluentValidation.AspNetCore, and replace with new package FluentValidation.AspNetCore, 11.3.1",
+            "protectedSnippet": "FluentValidation.AspNetCore, 11.3.1\n\nRecommendation:\n\nShould be replaced.\nRemove FluentValidation.AspNetCore, and replace with new package FluentValidation.AspNetCore, 11.3.1",
+            "label": "FluentValidation.AspNetCore 11.3.1",
+            "properties": {
+              "PackageId": "FluentValidation.AspNetCore",
+              "PackageVersion": "11.3.1",
+              "PackageNewVersion": null,
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "e5741561-deef-4a0c-8951-f61db5c4e89a",
+          "ruleId": "NuGet.0005",
+          "projectPath": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Mvc.Versioning, 5.1.0\n\nRecommendation:\n\nA newer package is available as of August 2022. While this package will continue to receive critical bug fixes, we strongly encourage you to upgrade. See the migration guide at https://github.com/dotnet/aspnet-api-versioning/wiki/Migration for more details.\nRemove Microsoft.AspNetCore.Mvc.Versioning, and replace with new package Microsoft.AspNetCore.Mvc.Versioning, 5.1.0",
+              "protected": "Microsoft.AspNetCore.Mvc.Versioning, 5.1.0\n\nRecommendation:\n\nA newer package is available as of August 2022. While this package will continue to receive critical bug fixes, we strongly encourage you to upgrade. See the migration guide at https://github.com/dotnet/aspnet-api-versioning/wiki/Migration for more details.\nRemove Microsoft.AspNetCore.Mvc.Versioning, and replace with new package Microsoft.AspNetCore.Mvc.Versioning, 5.1.0"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+            "snippet": "Microsoft.AspNetCore.Mvc.Versioning, 5.1.0\n\nRecommendation:\n\nA newer package is available as of August 2022. While this package will continue to receive critical bug fixes, we strongly encourage you to upgrade. See the migration guide at https://github.com/dotnet/aspnet-api-versioning/wiki/Migration for more details.\nRemove Microsoft.AspNetCore.Mvc.Versioning, and replace with new package Microsoft.AspNetCore.Mvc.Versioning, 5.1.0",
+            "protectedSnippet": "Microsoft.AspNetCore.Mvc.Versioning, 5.1.0\n\nRecommendation:\n\nA newer package is available as of August 2022. While this package will continue to receive critical bug fixes, we strongly encourage you to upgrade. See the migration guide at https://github.com/dotnet/aspnet-api-versioning/wiki/Migration for more details.\nRemove Microsoft.AspNetCore.Mvc.Versioning, and replace with new package Microsoft.AspNetCore.Mvc.Versioning, 5.1.0",
+            "label": "Microsoft.AspNetCore.Mvc.Versioning 5.1.0",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Mvc.Versioning",
+              "PackageVersion": "5.1.0",
+              "PackageNewVersion": null,
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "cea5ed43-930f-49da-a4d6-66025ffbb5ee",
+          "ruleId": "NuGet.0005",
+          "projectPath": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer, 5.1.0\n\nRecommendation:\n\nA newer package is available as of August 2022. While this package will continue to receive critical bug fixes, we strongly encourage you to upgrade. See the migration guide at https://github.com/dotnet/aspnet-api-versioning/wiki/Migration for more details.\nRemove Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer, and replace with new package Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer, 5.1.0",
+              "protected": "Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer, 5.1.0\n\nRecommendation:\n\nA newer package is available as of August 2022. While this package will continue to receive critical bug fixes, we strongly encourage you to upgrade. See the migration guide at https://github.com/dotnet/aspnet-api-versioning/wiki/Migration for more details.\nRemove Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer, and replace with new package Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer, 5.1.0"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+            "snippet": "Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer, 5.1.0\n\nRecommendation:\n\nA newer package is available as of August 2022. While this package will continue to receive critical bug fixes, we strongly encourage you to upgrade. See the migration guide at https://github.com/dotnet/aspnet-api-versioning/wiki/Migration for more details.\nRemove Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer, and replace with new package Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer, 5.1.0",
+            "protectedSnippet": "Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer, 5.1.0\n\nRecommendation:\n\nA newer package is available as of August 2022. While this package will continue to receive critical bug fixes, we strongly encourage you to upgrade. See the migration guide at https://github.com/dotnet/aspnet-api-versioning/wiki/Migration for more details.\nRemove Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer, and replace with new package Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer, 5.1.0",
+            "label": "Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer 5.1.0",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer",
+              "PackageVersion": "5.1.0",
+              "PackageNewVersion": null,
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "64bd470e-f472-4e07-aa2a-a7ab0a32d026",
+          "ruleId": "Project.0002",
+          "projectPath": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net8.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+            "snippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "9c1b2df1-b939-4b6a-9428-da043c61d105",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: New TimeSpan.From*() overloads that take integers ",
+          "projectPath": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "syncTokenSource.CancelAfter(TimeSpan.FromSeconds(10));",
+              "protected": "M:System.TimeSpan.FromSeconds(System.Double)"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi/Presentation/Controllers/KafkaControllerV2.cs",
+            "snippet": "syncTokenSource.CancelAfter(TimeSpan.FromSeconds(10));",
+            "protectedSnippet": "M:System.TimeSpan.FromSeconds(System.Double)",
+            "label": "M:System.TimeSpan.FromSeconds(System.Double)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/timespan-from-overloads.md",
+                "isCustom": false
+              }
+            ],
+            "line": 64,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "7b4a3467-3274-4c99-8cb4-ad8890deef30",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: New TimeSpan.From*() overloads that take integers ",
+          "projectPath": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var msg = _kafkaConsumer.Consume(TimeSpan.FromMilliseconds(100));",
+              "protected": "M:System.TimeSpan.FromMilliseconds(System.Double)"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi/Presentation/Controllers/KafkaController.cs",
+            "snippet": "var msg = _kafkaConsumer.Consume(TimeSpan.FromMilliseconds(100));",
+            "protectedSnippet": "M:System.TimeSpan.FromMilliseconds(System.Double)",
+            "label": "M:System.TimeSpan.FromMilliseconds(System.Double)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/timespan-from-overloads.md",
+                "isCustom": false
+              }
+            ],
+            "line": 48,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "7412ad1c-76e5-42b9-a653-cd9f7295ff54",
+          "ruleId": "Api.0003",
+          "description": "URI query redaction in IHttpClientFactory logs ",
+          "projectPath": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "services\r\n                .AddHttpClient(\r\n                    \u0022\u0022,\r\n                    (provider, client) =\u003E\r\n                    {\r\n                        client.DefaultRequestHeaders.Add(\u0022User-Agent\u0022, applicationName);\r\n                    }\r\n                )\r\n                .UseHttpClientMetrics();",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.IServiceProvider,System.Net.Http.HttpClient})"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi/Infrastructure/Installers/ServiceInstaller.cs",
+            "snippet": "services\r\n                .AddHttpClient(\r\n                    \u0022\u0022,\r\n                    (provider, client) =\u003E\r\n                    {\r\n                        client.DefaultRequestHeaders.Add(\u0022User-Agent\u0022, applicationName);\r\n                    }\r\n                )\r\n                .UseHttpClientMetrics();",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.IServiceProvider,System.Net.Http.HttpClient})",
+            "label": "M:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.Action{System.IServiceProvider,System.Net.Http.HttpClient})",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/9.0/query-redaction-logs.md",
+                "isCustom": false
+              }
+            ],
+            "line": 60,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "92f9248e-4638-440e-aba6-a1e18581b1d8",
+          "ruleId": "Api.0001",
+          "description": "Breaking change: DynamicallyAccessedMembers annotation removed from trim-unsafe configuration APIs ",
+          "projectPath": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "services.Configure\u003CPrometheusConfig\u003E(\r\n                configuration.GetSection(PrometheusConfig.Position)\r\n            );",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi/Infrastructure/Installers/ServiceInstaller.cs",
+            "snippet": "services.Configure\u003CPrometheusConfig\u003E(\r\n                configuration.GetSection(PrometheusConfig.Position)\r\n            );",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/extensions/10.0/dynamically-accessed-members-configuration.md",
+                "isCustom": false
+              }
+            ],
+            "line": 27,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "afda3f42-013b-44a0-97af-7bf73a90b1ca",
+          "ruleId": "Api.0001",
+          "description": "Breaking change: DynamicallyAccessedMembers annotation removed from trim-unsafe configuration APIs ",
+          "projectPath": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "services.Configure\u003CKafkaConsumerConfig\u003E(\r\n                configuration.GetSection(KafkaConsumerConfig.Position)\r\n            );",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi/Infrastructure/Installers/ServiceInstaller.cs",
+            "snippet": "services.Configure\u003CKafkaConsumerConfig\u003E(\r\n                configuration.GetSection(KafkaConsumerConfig.Position)\r\n            );",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/extensions/10.0/dynamically-accessed-members-configuration.md",
+                "isCustom": false
+              }
+            ],
+            "line": 24,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "8bd9a36d-f483-4187-b64a-3c2046bf30ee",
+          "ruleId": "Api.0001",
+          "description": "Breaking change: DynamicallyAccessedMembers annotation removed from trim-unsafe configuration APIs ",
+          "projectPath": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "services.Configure\u003CKafkaProducerConfig\u003E(\r\n                configuration.GetSection(KafkaProducerConfig.Position)\r\n            );",
+              "protected": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi/Infrastructure/Installers/ServiceInstaller.cs",
+            "snippet": "services.Configure\u003CKafkaProducerConfig\u003E(\r\n                configuration.GetSection(KafkaProducerConfig.Position)\r\n            );",
+            "protectedSnippet": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)",
+            "label": "M:Microsoft.Extensions.DependencyInjection.OptionsConfigurationServiceCollectionExtensions.Configure\u0060\u00601(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/extensions/10.0/dynamically-accessed-members-configuration.md",
+                "isCustom": false
+              }
+            ],
+            "line": 21,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "fbafc325-f476-4679-a052-95c49bd824b4",
+          "ruleId": "Api.0001",
+          "description": "Breaking change: DynamicallyAccessedMembers annotation removed from trim-unsafe configuration APIs ",
+          "projectPath": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var kafkaProducersOptions = configuration.Get\u003CKafkaProducerConfig\u003E();",
+              "protected": "M:Microsoft.Extensions.Configuration.ConfigurationBinder.Get\u0060\u00601(Microsoft.Extensions.Configuration.IConfiguration)"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi/Infrastructure/Installers/KafkaInstaller.cs",
+            "snippet": "var kafkaProducersOptions = configuration.Get\u003CKafkaProducerConfig\u003E();",
+            "protectedSnippet": "M:Microsoft.Extensions.Configuration.ConfigurationBinder.Get\u0060\u00601(Microsoft.Extensions.Configuration.IConfiguration)",
+            "label": "M:Microsoft.Extensions.Configuration.ConfigurationBinder.Get\u0060\u00601(Microsoft.Extensions.Configuration.IConfiguration)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/extensions/10.0/dynamically-accessed-members-configuration.md",
+                "isCustom": false
+              }
+            ],
+            "line": 19,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "6c913ddb-7692-4a4a-919b-5f8a960a4744",
+          "ruleId": "Api.0001",
+          "description": "Breaking change: DynamicallyAccessedMembers annotation removed from trim-unsafe configuration APIs ",
+          "projectPath": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var kafkaConsumerOptions = configuration.Get\u003CKafkaConsumerConfig\u003E();",
+              "protected": "M:Microsoft.Extensions.Configuration.ConfigurationBinder.Get\u0060\u00601(Microsoft.Extensions.Configuration.IConfiguration)"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi/Infrastructure/Installers/KafkaInstaller.cs",
+            "snippet": "var kafkaConsumerOptions = configuration.Get\u003CKafkaConsumerConfig\u003E();",
+            "protectedSnippet": "M:Microsoft.Extensions.Configuration.ConfigurationBinder.Get\u0060\u00601(Microsoft.Extensions.Configuration.IConfiguration)",
+            "label": "M:Microsoft.Extensions.Configuration.ConfigurationBinder.Get\u0060\u00601(Microsoft.Extensions.Configuration.IConfiguration)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/extensions/10.0/dynamically-accessed-members-configuration.md",
+                "isCustom": false
+              }
+            ],
+            "line": 18,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "d4a1d50e-d697-475d-a9d3-d7fb0a3989fa",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: Exception diagnostics are suppressed when IExceptionHandler.TryHandleAsync returns true ",
+          "projectPath": "Cheetah.WebApi/Cheetah.WebApi.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "app.UseExceptionHandler(\r\n                    app.Environment.IsDevelopment() ? \u0022/error-development\u0022 : \u0022/error\u0022\r\n                );",
+              "protected": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi/Program.cs",
+            "snippet": "app.UseExceptionHandler(\r\n                    app.Environment.IsDevelopment() ? \u0022/error-development\u0022 : \u0022/error\u0022\r\n                );",
+            "protectedSnippet": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)",
+            "label": "M:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/aspnet-core/10/exception-handler-diagnostics-suppressed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 123,
+            "column": 16
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "Cheetah.WebApi.Test/Cheetah.WebApi.Test.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "Cheetah.WebApi.Test",
+        "projectKind": "DotNetCoreApp",
+        "frameworks": [
+          "net8.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 0,
+        "numberOfCodeFiles": 0,
+        "linesTotal": 0,
+        "linesOfCode": 0,
+        "totalApiScanned": 1,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "34e2a2af-ed30-4e3f-8db0-af31be1d3297",
+          "ruleId": "Project.0002",
+          "projectPath": "Cheetah.WebApi.Test/Cheetah.WebApi.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net8.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net8.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "Cheetah.WebApi.Test/Cheetah.WebApi.Test.csproj",
+            "snippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net8.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net8.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    }
+  ],
+  "rules": {
+    "NuGet.0002": {
+      "id": "NuGet.0002",
+      "isFeature": false,
+      "description": "NuGet package upgrade is recommended for selected target framework.\n\nStandard .NET packages are recommended to have versions matching version of .NET that project targets.\n\nSome other packages also are known to work better for selected target frameworks.",
+      "label": "NuGet package upgrade is recommended",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262530",
+          "isCustom": false
+        }
+      ]
+    },
+    "NuGet.0003": {
+      "id": "NuGet.0003",
+      "isFeature": false,
+      "description": "NuGet package functionality is included with framework reference.\n\nPackage needs to be removed.",
+      "label": "NuGet package functionality is included with framework reference",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262609",
+          "isCustom": false
+        }
+      ]
+    },
+    "NuGet.0001": {
+      "id": "NuGet.0001",
+      "isFeature": false,
+      "description": "NuGet package is incompatible with selected target framework.\n\nPackage needs to be upgraded to a version supporting selected project target framework. If there no new package versions supporting new target framework, different package needs to be used and all code needs to be upgraded to new API.",
+      "label": "NuGet package is incompatible",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262529",
+          "isCustom": false
+        }
+      ]
+    },
+    "NuGet.0005": {
+      "id": "NuGet.0005",
+      "isFeature": false,
+      "description": "NuGet package is deprecated.\n\nGo to its documentation and if there is a guidance for replacement of functionality provided by this package.",
+      "label": "NuGet package is deprecated",
+      "severity": "Optional",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262531",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0002": {
+      "id": "Project.0002",
+      "isFeature": false,
+      "description": "Project\u0027s target framework(s) needs to be changed to the new target framework that you selected for this upgrade.\n\nDuring upgrade target framework will be adjusted to corresponding platform when applicable. In some cases project would result in multiple target frameworks after the upgrade if it was using features that now have their own platforms in modern .NET frameworks (windows, iOS, Android etc).",
+      "label": "Project\u0027s target framework(s) needs to be changed",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0002": {
+      "id": "Api.0002",
+      "isFeature": false,
+      "description": "API is source incompatible for selected .NET version: requires code changes to compile successfully when targeting a new version, such as removing obsolete APIs or changing method signatures.",
+      "label": "Source incompatible for selected .NET version",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Breaking changes in .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0003": {
+      "id": "Api.0003",
+      "isFeature": false,
+      "description": "API has a behavioral change in selected .NET version: code and binaries may behave differently at runtime without needing recompilation, but the new behavior might be undesirable and require updates.",
+      "label": "Behavioral change in selected .NET version",
+      "severity": "Potential",
+      "effort": 1
+    },
+    "Api.0001": {
+      "id": "Api.0001",
+      "isFeature": false,
+      "description": "API is binary incompatible for selected .NET version: affects existing binaries, often requiring recompilation, because the API has changed in a way that prevents older binaries from loading or executing.",
+      "label": "Binary incompatible for selected .NET version",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Breaking changes in .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    }
+  }
+}
