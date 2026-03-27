@@ -54,7 +54,7 @@ jobs:
           INITIAL_KAFKA_TOPICS: cheetahwebapi
 
       - name: "Wait for opensearch, the slowest component"
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           timeout_minutes: 3
           max_attempts: 25
@@ -71,7 +71,7 @@ jobs:
 
       - name: "Check health"
         id: "integrationtest"
-        uses: nick-fields/retry@v3
+        uses: nick-fields/retry@v4
         with:
           timeout_minutes: 1
           max_attempts: 25
