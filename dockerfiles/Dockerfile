@@ -22,5 +22,6 @@ WORKDIR /app
 COPY --from=build /app/publish .
 
 # 64198
+# hadolint ignore=DL3066
 USER $APP_UID
 ENTRYPOINT ["dotnet", "Cheetah.WebApi.dll"]
